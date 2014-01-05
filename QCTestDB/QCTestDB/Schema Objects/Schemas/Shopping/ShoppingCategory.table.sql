@@ -1,0 +1,9 @@
+﻿CREATE TABLE [Shopping].[Category]
+(
+  [CategoryID]    INT           NOT NULL  IDENTITY (1, 1),
+  [Code]          VARCHAR (10)  NOT NULL,
+  [CategoryName]  VARCHAR (15)  NOT NULL,
+
+  CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED ([CategoryID] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF),
+  CONSTRAINT [UK_Category_CategoryCode] UNIQUE ([Code])
+)

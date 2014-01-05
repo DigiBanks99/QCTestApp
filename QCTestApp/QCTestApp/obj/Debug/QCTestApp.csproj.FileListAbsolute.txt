@@ -1,0 +1,5 @@
+D:\sandbox\QCTest\QCTestApp\QCTestApp\bin\Debug\QCTestApp.exe.config
+D:\sandbox\QCTest\QCTestApp\QCTestApp\bin\Debug\QCTestApp.exe
+D:\sandbox\QCTest\QCTestApp\QCTestApp\bin\Debug\QCTestApp.pdb
+D:\sandbox\QCTest\QCTestApp\QCTestApp\obj\Debug\QCTestApp.exe
+D:\sandbox\QCTest\QCTestApp\QCTestApp\obj\Debug\QCTestApp.pdb

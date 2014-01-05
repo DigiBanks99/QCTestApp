@@ -1,0 +1,205 @@
+﻿@standard-margin: 15px 15px 15px 15px;
+@standard-margin-single: 15px; 
+
+@button-radius: 27px;
+@button-shadow: inset 0px 1px 1px 0px;
+
+@buy-button-color-a: #3D94F6;
+@buy-button-color-b: #1E62D0;
+@buy-button-color-shadow: #97C4FE;
+@buy-button-box-shadow: @button-shadow @buy-button-color-shadow;
+
+@light-grey-text: #727272;
+@price-color: #BB5710;
+
+.shopping {
+  display: block;
+  margin: @standard-margin;
+
+  > h2 > a {
+    color: #6820cf;
+    margin: @standard-margin;
+  }
+
+  > div > a > div > img {
+    height: 90px;
+  }
+
+  > div > a > div {
+    color: #6820CF;
+    margin-left: @standard-margin-single;
+
+    > h3 > span {
+      margin-left: @standard-margin-single;
+    }
+
+    > p > span {
+      margin-left: @standard-margin-single;
+    }
+  }
+}
+
+.shopping-list {
+  color: #6820CF;
+  display: block;
+}
+
+.item-tile {
+  display: block;
+  margin: @standard-margin;
+
+  > h3 {
+    color: #BB5710;
+    margin: @standard-margin-single auto auto 0;
+  }
+
+  > img {
+    margin-left: @standard-margin-single;
+    border: 2px medium #619ABB;
+  }
+
+  > p {
+    margin: @standard-margin-single auto auto 0;
+  }
+
+  > div {
+    > div {
+      > p {
+        margin: 10px auto auto 0;
+        position: relative;
+
+        > span {
+          color: black;
+          margin-left: @standard-margin-single;
+          padding: @standard-margin-single auto auto @standard-margin-single;
+        }
+
+        > strong {
+          color: #116292;
+          margin-top: 50px;
+        }
+      }
+
+      > ul {
+        margin-left: @standard-margin-single;
+
+        > li {
+          list-style-type: disc;
+          margin-left: @standard-margin-single;
+        }
+      }
+    }
+  }
+}
+
+.short-description {
+  color: @light-grey-text;
+}
+
+.price {
+  color: @price-color;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.wishlist-button {
+  -moz-box-shadow: @button-shadow #fed897;
+  -webkit-box-shadow: @button-shadow #fed897;
+  box-shadow: @button-shadow #fed897;
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f6b33d), color-stop(1, #d29105) );
+  background: -moz-linear-gradient( center top, #f6b33d 5%, #d29105 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6b33d', endColorstr='#d29105');
+  background-color: #f6b33d;
+  -webkit-border-top-left-radius: @button-radius;
+  -moz-border-radius-topleft: @button-radius;
+  border-top-left-radius: @button-radius;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: @button-radius;
+  -moz-border-radius-bottomright: @button-radius;
+  border-bottom-right-radius: @button-radius;
+  -webkit-border-bottom-left-radius: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  border-bottom-left-radius: 0px;
+  text-indent: 0px;
+  border: 1px solid #eda933;
+  display: inline-block;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: @standard-margin-single;
+  font-weight: bold;
+  font-style: normal;
+  height: 46px;
+  line-height: 23px !important;
+  width: 156px;
+  text-decoration: none;
+  text-align: center;
+  -webkit-text-shadow: 0px 4px 0px #cd8a15;
+  text-shadow: 0px 4px 0px #cd8a15;
+  padding: 5px 5px 5px 5px;
+  margin: @standard-margin-single 5px 5px 5px;
+}
+
+.wishlist-button:hover {
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d29105), color-stop(1, #f6b33d) );
+  background: -moz-linear-gradient( center top, #d29105 5%, #f6b33d 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d29105', endColorstr='#f6b33d');
+  background-color: #d29105;
+}
+
+.wishlist-button:active {
+  position: relative;
+  top: 1px;
+}
+
+.buy-button {
+  -moz-box-shadow: @buy-button-box-shadow;
+  -webkit-box-shadow: @buy-button-box-shadow;
+  box-shadow: @buy-button-box-shadow;
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, @buy-button-color-a), color-stop(1, @buy-button-color-b) );
+  background: -moz-linear-gradient( center top, @buy-button-color-a 5%, @buy-button-color-b 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+  background-color: @buy-button-color-a;
+  -webkit-border-top-left-radius: @button-radius;
+  -moz-border-radius-topleft: @button-radius;
+  border-top-left-radius: @button-radius;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: @button-radius;
+  -moz-border-radius-bottomright: @button-radius;
+  border-bottom-right-radius: @button-radius;
+  -webkit-border-bottom-left-radius: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  border-bottom-left-radius: 0px;
+  text-indent: 0px;
+  border: 1px solid #337fed;
+  display: inline-block;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: @standard-margin-single;
+  font-weight: bold;
+  font-style: normal;
+  height: 46px;
+  line-height: 23px !important;
+  width: 156px;
+  text-decoration: none;
+  text-align: center;
+  -webkit-text-shadow: 0px 4px 0px #1661ad;
+  text-shadow: 0px 4px 0px #1661ad;
+  padding: 5px 5px 5px 5px;
+  margin: 5px 5px 5px 5px;
+}
+
+.buy-button:hover {
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, @buy-button-color-b), color-stop(1, #3d94f6) );
+  background: -moz-linear-gradient( center top, @buy-button-color-b 5%, @buy-button-color-a 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1E62D0', endColorstr='#3D94F6');
+  background-color: @buy-button-color-b;
+}
+
+.buy-button:active {
+  position: relative;
+  top: 1px;
+}

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="e9c211ca-b16c-454a-abcd-e5c5aa53572d" ChangeDateTime="12/11/2013 07:49:35">
+    <Property Name="ElementName" Value="[Shopping].[Item].[ItemCode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Shopping].[Item]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Code" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="520f72e6-22d9-4dd5-9899-a7daf4329362" ChangeDateTime="12/11/2013 07:49:43">
+    <Property Name="ElementName" Value="[Shopping].[Cart].[CartCode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Shopping].[Cart]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Code" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="dc3f3bbc-39e3-4ce2-8041-482532c3f7a5" ChangeDateTime="12/11/2013 07:49:57">
+    <Property Name="ElementName" Value="[Shopping].[Wishlist].[WishlistCode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Shopping].[Wishlist]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Code" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e7ad277d-5b4f-42fa-9c58-a25fe1ca1ee5" ChangeDateTime="12/11/2013 07:50:05">
+    <Property Name="ElementName" Value="[Shopping].[Category].[CategoryCode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Shopping].[Category]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Code" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8bf98b77-394b-4398-8168-3782a03c3d6d" ChangeDateTime="12/11/2013 07:50:48">
+    <Property Name="ElementName" Value="[Security].[User].[UserCode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Security].[User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Code" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4340540f-deec-4ac1-aefb-383f9b2c2a5a" ChangeDateTime="12/11/2013 12:29:35">
+    <Property Name="ElementName" Value="[Shopping].[Wishlist].[DateAdded]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Shopping].[Wishlist]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateCreated" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="efd91e6f-42f1-41ed-8d0d-3c3a5e84ebdc" ChangeDateTime="12/11/2013 12:35:23">
+    <Property Name="ElementName" Value="[Shopping].[WishlistItems].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Shopping].[WishlistItems]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WishlistItemID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5c4526a1-cd64-4f87-9c11-b2c7372bc80d" ChangeDateTime="12/11/2013 12:37:11">
+    <Property Name="ElementName" Value="[Shopping].[WishlistItems].[CategoryID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Shopping].[WishlistItems]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateAdded" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1522ca2f-6d48-4abb-9196-806e3fc68df1" ChangeDateTime="12/11/2013 13:57:53">
+    <Property Name="ElementName" Value="[Shopping].[Cart].[CreationDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Shopping].[Cart]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateCreated" />
+  </Operation>
+</Operations>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <CommentOutSetVarDeclarations>True</CommentOutSetVarDeclarations>
+    <CreateNewDatabase>False</CreateNewDatabase>
+    <BackupDatabaseBeforeChanges>False</BackupDatabaseBeforeChanges>
+    <BlockOnPossibleDataLoss>True</BlockOnPossibleDataLoss>
+    <NoAlterStatementsToChangeCLRTypes>False</NoAlterStatementsToChangeCLRTypes>
+    <DropObjectsNotInSource>True</DropObjectsNotInSource>
+    <DeployDatabaseInSingleUserMode>False</DeployDatabaseInSingleUserMode>
+    <DeployScriptFileName>QCTest.Scripts.VER.UP.sql</DeployScriptFileName>
+    <ProfileVersionNumber>1</ProfileVersionNumber>
+    <TargetDatabaseName>qctest</TargetDatabaseName>
+    <TargetConnectionString>Data Source=PeopleServer;Integrated Security=True;Pooling=False</TargetConnectionString>
+    <ScriptDatabaseOptions>True</ScriptDatabaseOptions>
+    <BlockWhenDriftDetected>True</BlockWhenDriftDetected>
+    <RegisterDataTierApplication>True</RegisterDataTierApplication>
+  </PropertyGroup>
+</Project>
