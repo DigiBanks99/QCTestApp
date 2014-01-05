@@ -1,4 +1,4 @@
-﻿CREATE TABLE [Shopping].[WishlistItems]
+﻿CREATE TABLE [Shopping].[WishlistItem]
 (
   [WishlistItemID]  INT           NOT NULL  IDENTITY (1,1), 
   [WishlistID]      INT           NOT NULL, 
