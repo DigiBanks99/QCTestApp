@@ -1,7 +1,13 @@
 ﻿<div ng-controller="ItemCtrl" class="container app-content">
   <itemtile item="item"></itemtile>
 
-  <button type="button" class="wishlist-button" ng-click="addToWishlist()">Add to Wishlist</button>
+  <button type="button" class="wishlist-button" ng-click="showWishlists()">Add to Wishlist</button>
   <button type="button" class="buy-button" ng-click="buy()">Buy</button>
-  <wishlistlist wishls="wishls"></wishlistlist>
+  <div class="wishlist-text" ng-hide="hideWishlists">
+    <ul>
+      <li ng-repeat="wishlist in wishls">
+        <button type="button" class="wishlist-text" ng-click="addToWishlist(wishlist)">{{wishlist.WishlistName}}</button>
+      </li>
+    </ul>
+  </div>
 </div>
