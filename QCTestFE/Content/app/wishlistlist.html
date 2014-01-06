@@ -3,8 +3,6 @@
     <h3>{{wishlist.WishlistName}}</h3>
     <ul>
       <li ng-repeat="wlItem in wishlist.WishlistItems">
-        <div>WLID: {{wlItem.WishlistID}}</div>
-        <div itemline item="getItem(wlItem.ItemID)"></div>
         <itemline item="getItem(wlItem.ItemID)"></itemline>
       </li>
     </ul>

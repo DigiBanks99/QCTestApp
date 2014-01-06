@@ -1,4 +1,8 @@
-﻿function HomeCtrl($scope, $http, $location, $sce) {
+﻿function AccordionCntrl($scope) {
+  $scope.expandAccordion = ExpandAccordion();
+}
+
+function HomeCtrl($scope, $http, $location, $sce) {
   $http.get('api/items').then(function (response) {
     $scope.itemList = response.data;
 
@@ -32,9 +36,11 @@ function ItemCtrl($scope, $http, $routeParams, $sce, $location) {
     $scope.item = response.data;
   })
 
-  $http.get('/api/wishlist').then(function (response) {
-    $scope.wishls = response.data;
-  })
+  if (typeof $scope.wishls === 'undefined') {
+    $http.get('/api/wishlist').then(function (response) {
+      $scope.wishls = response.data;
+    })
+  }
 
   $scope.buy = function () {
     var itemInfo = new Object();
@@ -76,12 +82,6 @@ function ItemCtrl($scope, $http, $routeParams, $sce, $location) {
 function WishlistCtrl($scope, $http, $routeParams, $location) {
   var apiController = '/api/wishlist';
 
-  $scope.getItem = function (itemID) {
-    $http.get('/api/items/' + $routeParams.id).then(function (response) {
-      return response.data;
-    });
-  };
-
   $http.get(apiController + '/' + $routeParams).then(function (response) {
     $scope.wishlist = response.data;
   });
@@ -90,10 +90,15 @@ function WishlistCtrl($scope, $http, $routeParams, $location) {
 function WishlistListCtrl($scope, $http, $routeParams, $location) {
   var apiController = '/api/wishlist';
 
+  $http.get('/api/items').then(function (response) {
+    $scope.items = response.data;
+  });
+
   $scope.getItem = function (itemID) {
-    $http.get('/api/items/' + $routeParams.id).then(function (response) {
-      return response.data;
-    });
+    for (var i = 0; i < $scope.items.length; i++) {
+      if ($scope.items[i].ItemID == itemID)
+        return $scope.items[i];
+    }
   };
 
   $http.get(apiController).then(function (response) {
@@ -104,4 +109,15 @@ function WishlistListCtrl($scope, $http, $routeParams, $location) {
 //Utils
 function ToTrusted(html_code, $sce) {
   return $sce.trustAsHtml(html_code);
+}
+
+function ExpandAccordion() {
+  $("#accordian h3").click(function () {
+    //slide up all the link lists
+    $("#accordian ul ul").slideUp();
+    //slide down the link list below the h3 clicked - only if its closed
+    if (!$(this).next().is(":visible")) {
+      $(this).next().slideDown();
+    }
+  })
 }

@@ -15,8 +15,8 @@ SET NUMERIC_ROUNDABORT OFF;
 GO
 :setvar DatabaseName "QCTestDB"
 :setvar DefaultFilePrefix "QCTestDB"
-:setvar DefaultDataPath "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQL12\MSSQL\DATA\"
-:setvar DefaultLogPath "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQL12\MSSQL\DATA\"
+:setvar DefaultDataPath "D:\SQL\Data\"
+:setvar DefaultLogPath "D:\SQL\Logs\"
 
 GO
 :on error exit

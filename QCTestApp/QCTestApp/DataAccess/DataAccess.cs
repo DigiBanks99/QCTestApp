@@ -114,6 +114,7 @@ namespace QCTestApp.DataAccess
       var res = GetScalarRes<int?>(key);
       if (res.HasValue)
         obj.Identity = res.Value;
+      CloseConnection();
 
       return obj.Identity;
     }
@@ -133,6 +134,7 @@ namespace QCTestApp.DataAccess
       cmd.Parameters.AddWithValue(string.Format("@{0}0", obj.ColumnList[0]), obj.GetValue(obj.ColumnList[0]));
       cmd.CommandText = sb.ToString();
       var key = UpdateDatabase(cmd);
+      CloseConnection();
       return obj.Identity;
     }
 
@@ -143,6 +145,7 @@ namespace QCTestApp.DataAccess
       cmd.Parameters.AddWithValue(string.Format("@{0}ID", obj.GetObjectName()), obj.Identity);
       cmd.CommandText = qry;
       UpdateDatabase(cmd);
+      CloseConnection();
     }
 
     public static bool OpenConnection()
@@ -158,7 +161,8 @@ namespace QCTestApp.DataAccess
           case ConnectionState.Connecting:
           case ConnectionState.Executing:
           case ConnectionState.Fetching:
-          case ConnectionState.Open: 
+          case ConnectionState.Open:
+            CloseConnection();
             break;
           case ConnectionState.Closed:
             _connection.Open();

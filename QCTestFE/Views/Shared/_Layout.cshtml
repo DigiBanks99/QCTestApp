@@ -52,11 +52,11 @@
     </div>
   </header>
 
-  <div class="container">
+  <div class="container" ng-controller="AccordionCntrl">
     <div id="accordian" style="float: left">
       <ul>
         <li>
-          <h3><i class="fa fa-cutlery fa-lg"></i>Furniture</h3>
+          <h3 ng-click="expandAccordion()"><i class="fa fa-cutlery fa-lg"></i>Furniture</h3>
           <ul>
             <li><a href="/items/category:tables">Tables</a></li>
             <li><a href="/items/category:chairs">Chairs</a></li>
@@ -82,7 +82,6 @@
             <li><a href="/items/category:running">Running</a></li>
           </ul>
         </li>
-        <li class="menu-fill"><br /></li>
       </ul>
     </div>
   </div>
