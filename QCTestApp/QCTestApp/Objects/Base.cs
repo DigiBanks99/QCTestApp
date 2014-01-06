@@ -22,6 +22,7 @@ namespace QCTestApp.Objects
     void SetValue(string propertyName, object value);
     void SetFieldsReader(SqlDataReader reader);
     void Save();
+    void LoadChildren();
   }
 
   public abstract class Base : IBase
@@ -108,8 +109,8 @@ namespace QCTestApp.Objects
     }
 
     public virtual void UpdateChildren() { }
-
     public virtual void SaveChildren() { }
+    public virtual void LoadChildren() { }
     #endregion //Virtual Methods
 
     #region Utilities

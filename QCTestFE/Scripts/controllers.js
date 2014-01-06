@@ -21,6 +21,8 @@
 }
 
 function ItemCtrl($scope, $http, $routeParams, $sce, $location) {
+  $scope.hideWishlists = true;
+
   $http.get('/api/items/' + $routeParams.id).then(function (response) {
     $scope.ItemID = response.data.ItemID;
     $scope.ItemName = response.data.ItemName;
@@ -48,20 +50,56 @@ function ItemCtrl($scope, $http, $routeParams, $sce, $location) {
     );
   };
 
-  $scope.addToWishlist = function AddToWishList() {
-    var itemInfo = new Object();
-    if ($scope.item == null || $scope.item.ItemID == null)
-      itemInfo.ItemID = $routeParams.id;
-    else
-      itemInfo.ItemID = $scope.item.ItemID;
-    $scope.request = itemInfo;
-    $http.post('/api/wishlist', $scope.request)
+  $scope.showWishlists = function () {
+    $scope.hideWishlists = false;
+  };
+
+  $scope.addToWishlist = function AddToWishlist(wishlist) {
+    var dataArray = new Array();
+    if ($scope.item == null || wishlist == null)
+    {
+      console.log("DEV Error: JS - item or wishlist is null");
+      return;
+    }
+    dataArray[0] = $scope.item.ItemID;
+    dataArray[1] = wishlist.WishlistID;
+    $scope.request = dataArray;
+    $http.post('/api/wishlistitem', $scope.request)
         .then(function (response) {
           $scope.message = response.data.Message;
+          $scope.hideWishlists = true;
         }
     );
   };
-};
+}
+
+function WishlistCtrl($scope, $http, $routeParams, $location) {
+  var apiController = '/api/wishlist';
+
+  $scope.getItem = function (itemID) {
+    $http.get('/api/items/' + $routeParams.id).then(function (response) {
+      return response.data;
+    });
+  };
+
+  $http.get(apiController + '/' + $routeParams).then(function (response) {
+    $scope.wishlist = response.data;
+  });
+}
+
+function WishlistListCtrl($scope, $http, $routeParams, $location) {
+  var apiController = '/api/wishlist';
+
+  $scope.getItem = function (itemID) {
+    $http.get('/api/items/' + $routeParams.id).then(function (response) {
+      return response.data;
+    });
+  };
+
+  $http.get(apiController).then(function (response) {
+    $scope.wishlistList = response.data;
+  });
+}
 
 //Utils
 function ToTrusted(html_code, $sce) {

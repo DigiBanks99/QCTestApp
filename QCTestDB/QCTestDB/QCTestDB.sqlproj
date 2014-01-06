@@ -86,10 +86,10 @@
     <Build Include="Schema Objects\Schemas\Shopping\Shopping.ItemPicture.table.sql" />
     <Build Include="Schema Objects\Schemas\Shopping\Shopping.Order.table.sql" />
     <Build Include="Schema Objects\Schemas\Shopping\Shopping.Wishlist.table.sql" />
-    <Build Include="Schema Objects\Schemas\Shopping\ShoppingCategory.table.sql" />
     <Build Include="Schema Objects\Schemas\Shopping\Shopping.Cart.table.sql" />
     <Build Include="Schema Objects\Schemas\Shopping\Shopping.CartOrderRel.table.sql" />
-    <Build Include="Schema Objects\Schemas\Shopping\WishlistItems.sql" />
+    <Build Include="Schema Objects\Schemas\Shopping\Shopping.Category.table.sql" />
+    <Build Include="Schema Objects\Schemas\Shopping\Shopping.WishlistItem.table.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CreateQCTestDB.publish.xml" />

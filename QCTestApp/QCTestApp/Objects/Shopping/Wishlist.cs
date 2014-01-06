@@ -18,6 +18,8 @@ namespace QCTestApp.Objects.Shopping
 
     public const string CHILD_WISHLISTITEMS = "WishlistItems";
 
+    private bool _wishlistItemsLoaded;
+
     public Wishlist() { }
 
     #region Overrides
@@ -28,6 +30,7 @@ namespace QCTestApp.Objects.Shopping
       Code = Tools.GenCode(Tools.ActiveUser.Code);
       DateCreated = DateTime.Now;
       WishlistItems = new WishlistItemList();
+      _wishlistItemsLoaded = false;
     }
 
     public override string GetObjectName()
@@ -76,6 +79,16 @@ namespace QCTestApp.Objects.Shopping
         case COL_CATEGORYID: CategoryID = Convert.ToInt32(value); break;
       }
       base.SetValue(propertyName, value);
+    }
+
+    public override void UpdateChildren()
+    {
+      base.UpdateChildren();
+    }
+
+    public override void LoadChildren()
+    {
+      LoadWishlistItems();
     }
     #endregion //Overrides
 
@@ -133,12 +146,13 @@ namespace QCTestApp.Objects.Shopping
     #region Data Access
     public override void SetFieldsReader(System.Data.SqlClient.SqlDataReader reader)
     {
-      _wishlistID = reader.GetInt32(0);
-      _userID = reader.GetInt32(1);
-      _code = reader.GetString(2);
-      _dateCreated = reader.GetDateTime(3);
-      _wishlistName = reader.GetString(4);
-      _categoryID = reader.GetInt32(5);
+      int? nullInt = null;
+      _wishlistID = reader.IsDBNull(reader.GetOrdinal(COL_WISHLISTID)) ? -1 : reader.GetInt32(0);
+      _userID = reader.IsDBNull(reader.GetOrdinal(COL_USERID)) ? -1 : reader.GetInt32(1);
+      _code = reader.IsDBNull(reader.GetOrdinal(COL_CODE)) ? string.Empty : reader.GetString(2);
+      _dateCreated = reader.IsDBNull(reader.GetOrdinal(COL_DATECREATED)) ? DateTime.MinValue : reader.GetDateTime(3);
+      _wishlistName = reader.IsDBNull(reader.GetOrdinal(COL_WISHLISTNAME)) ? string.Empty : reader.GetString(4);
+      _categoryID = reader.IsDBNull(reader.GetOrdinal(COL_CATEGORYID)) ? nullInt : reader.GetInt32(5);
     }
     #endregion //Data Access
 
@@ -147,6 +161,43 @@ namespace QCTestApp.Objects.Shopping
     {
       return _wishlistItems;
     }
+
+    public void AddItemToList(Item item)
+    {
+      AddItemToList(item.ItemID);
+    }
+
+    public void AddItemToList(int itemID)
+    {
+      var wlItem = WishlistItems.AddNew() as WishlistItem;
+      wlItem.ItemID = itemID;
+      wlItem.WishlistID = this.WishlistID;
+      wlItem.DateAdded = DateTime.Now;
+      wlItem.Save();
+    }
     #endregion //Public Methods
+
+    #region Private Methods
+    public void LoadWishlistItems()
+    {
+      if (_wishlistItemsLoaded)
+        return;
+
+      string qry = "SELECT * FROM [Shopping].[WishlistItem] WHERE [WishlistID] = " + this.WishlistID;
+      DataAccess.DataAccess.ReadObjectData(this.WishlistItems, qry);
+      _wishlistItemsLoaded = true;
+    }
+    #endregion //Private Methods
+
+    #region Events
+    public override void OnPropertyChangedEvent(object sender, FrameWork.QCEventArguments.PropertyChangedEventArgs e)
+    {
+      if (e.PropertyName == COL_WISHLISTID)
+      {
+        LoadWishlistItems();
+      }
+      base.OnPropertyChangedEvent(sender, e);
+    }
+    #endregion //Events
   }
 }

@@ -181,7 +181,7 @@ CREATE SCHEMA [Security]
 
 
 GO
-PRINT N'Creating [Shopping].[WishlistItems]...';
+PRINT N'Creating [Shopping].[WishlistItem]...';
 
 
 GO
@@ -189,12 +189,34 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
-CREATE TABLE [Shopping].[WishlistItems] (
+CREATE TABLE [Shopping].[WishlistItem] (
     [WishlistItemID] INT           IDENTITY (1, 1) NOT NULL,
     [WishlistID]     INT           NOT NULL,
     [ItemID]         INT           NOT NULL,
     [DateAdded]      SMALLDATETIME NOT NULL,
     CONSTRAINT [PK_WishlistItems] PRIMARY KEY CLUSTERED ([WishlistItemID] ASC)
+);
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+PRINT N'Creating [Shopping].[Category]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+CREATE TABLE [Shopping].[Category] (
+    [CategoryID]   INT          IDENTITY (1, 1) NOT NULL,
+    [Code]         VARCHAR (10) NOT NULL,
+    [CategoryName] VARCHAR (15) NOT NULL,
+    CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED ([CategoryID] ASC),
+    CONSTRAINT [UK_Category_CategoryCode] UNIQUE NONCLUSTERED ([Code] ASC)
 );
 
 
@@ -242,28 +264,6 @@ CREATE TABLE [Shopping].[Cart] (
     [Status]      VARCHAR (1)     NOT NULL,
     CONSTRAINT [PK_Cart] PRIMARY KEY CLUSTERED ([CartID] ASC),
     CONSTRAINT [UK_Cart_CartCode] UNIQUE NONCLUSTERED ([Code] ASC)
-);
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-PRINT N'Creating [Shopping].[Category]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-CREATE TABLE [Shopping].[Category] (
-    [CategoryID]   INT          IDENTITY (1, 1) NOT NULL,
-    [Code]         VARCHAR (10) NOT NULL,
-    [CategoryName] VARCHAR (15) NOT NULL,
-    CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED ([CategoryID] ASC),
-    CONSTRAINT [UK_Category_CategoryCode] UNIQUE NONCLUSTERED ([Code] ASC)
 );
 
 
@@ -416,7 +416,7 @@ PRINT N'Creating FK_WishlistItems_Wishlist...';
 
 
 GO
-ALTER TABLE [Shopping].[WishlistItems]
+ALTER TABLE [Shopping].[WishlistItem]
     ADD CONSTRAINT [FK_WishlistItems_Wishlist] FOREIGN KEY ([WishlistID]) REFERENCES [Shopping].[Wishlist] ([WishlistID]);
 
 
@@ -425,7 +425,7 @@ PRINT N'Creating FK_WishlistItems_Item...';
 
 
 GO
-ALTER TABLE [Shopping].[WishlistItems]
+ALTER TABLE [Shopping].[WishlistItem]
     ADD CONSTRAINT [FK_WishlistItems_Item] FOREIGN KEY ([ItemID]) REFERENCES [Shopping].[Item] ([ItemID]);
 
 

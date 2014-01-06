@@ -60,6 +60,8 @@ namespace QCTestApp.DataAccess
           IBase obj = listObj.AddNew() as IBase;
           obj.SetFieldsReader(reader);
         }
+        CloseConnection();
+        listObj.LoadChildren();
       }
       catch (Exception ex)
       {

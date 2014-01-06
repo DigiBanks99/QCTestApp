@@ -19,6 +19,8 @@ namespace QCTestApp.Objects.Shopping
 
     public const string CHILD_CARTORDERITEMS = "CartOrderItems";
 
+    private bool _cartOrderItemsLoaded;
+
     public Cart() { }
 
     #region Overrides
@@ -30,6 +32,7 @@ namespace QCTestApp.Objects.Shopping
       Code = Tools.GenCode(Tools.ActiveUser.Code);
       DateCreated = DateTime.Now;
       CartOrderItems = new CartOrderRelList();
+      _cartOrderItemsLoaded = false;
     }
 
     public override string GetObjectName()
@@ -81,6 +84,12 @@ namespace QCTestApp.Objects.Shopping
         case COL_STATUS: Status = Convert.ToChar(value); break;
       }
       base.SetValue(propertyName, value);
+    }
+
+    public override void LoadChildren()
+    {
+      LoadCartOrderItems();
+      base.LoadChildren();
     }
     #endregion //Overrides
 
@@ -213,6 +222,17 @@ namespace QCTestApp.Objects.Shopping
       Tools.ActiveUser.PendingCart.Status = Constants.STATUS_ORDERED;
       Tools.ActiveUser.ActiveCart = new Cart();
     }
+
+    public void LoadCartOrderItems()
+    {
+      if (_cartOrderItemsLoaded)
+        return;
+
+      string qry = "SELECT * FROM [Shopping].[CartOrderRel] WHERE [CartID] = " + this.CartID;
+      DataAccess.DataAccess.ReadObjectData(this.CartOrderItems, qry);
+
+      _cartOrderItemsLoaded = true;
+    }
     #endregion //Public Methods
 
     #region Events
@@ -226,6 +246,10 @@ namespace QCTestApp.Objects.Shopping
       {
         if (Tools.ActiveUser != null)
           Tools.ActiveUser.ActiveCart = cart;
+      }
+      else if (e.PropertyName == COL_CARTID)
+      {
+        LoadCartOrderItems();
       }
       base.OnPropertyChangedEvent(sender, e);
     }

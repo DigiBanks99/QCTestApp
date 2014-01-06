@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace QCTestApp.Objects
   {
     IBase GetBaseObjectByKey(int key);
     object AddNew();
+    void LoadChildren();
   }
   #endregion //Interface
 
@@ -54,6 +56,14 @@ namespace QCTestApp.Objects
     }
 
     public abstract object AddNew();
+
+    public virtual void LoadChildren() 
+    { 
+      foreach (IBase obj in this)
+      {
+        obj.LoadChildren();
+      }
+    }
   }
   #endregion //Class
 }

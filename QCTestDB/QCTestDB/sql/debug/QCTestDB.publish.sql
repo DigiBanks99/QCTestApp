@@ -15,8 +15,8 @@ SET NUMERIC_ROUNDABORT OFF;
 GO
 :setvar DatabaseName "QCTestDB"
 :setvar DefaultFilePrefix "QCTestDB"
-:setvar DefaultDataPath "D:\SQL\Data\"
-:setvar DefaultLogPath "D:\SQL\Logs\"
+:setvar DefaultDataPath "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQL12\MSSQL\DATA\"
+:setvar DefaultLogPath "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQL12\MSSQL\DATA\"
 
 GO
 :on error exit
@@ -393,7 +393,7 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 
 
 GO
-PRINT N'Creating [Shopping].[WishlistItems]...';
+PRINT N'Creating [Shopping].[WishlistItem]...';
 
 
 GO
@@ -401,7 +401,7 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
-CREATE TABLE [Shopping].[WishlistItems] (
+CREATE TABLE [Shopping].[WishlistItem] (
     [WishlistItemID] INT           IDENTITY (1, 1) NOT NULL,
     [WishlistID]     INT           NOT NULL,
     [ItemID]         INT           NOT NULL,
@@ -500,7 +500,7 @@ PRINT N'Creating FK_WishlistItems_Item...';
 
 
 GO
-ALTER TABLE [Shopping].[WishlistItems]
+ALTER TABLE [Shopping].[WishlistItem]
     ADD CONSTRAINT [FK_WishlistItems_Item] FOREIGN KEY ([ItemID]) REFERENCES [Shopping].[Item] ([ItemID]);
 
 
@@ -509,7 +509,7 @@ PRINT N'Creating FK_WishlistItems_Wishlist...';
 
 
 GO
-ALTER TABLE [Shopping].[WishlistItems]
+ALTER TABLE [Shopping].[WishlistItem]
     ADD CONSTRAINT [FK_WishlistItems_Wishlist] FOREIGN KEY ([WishlistID]) REFERENCES [Shopping].[Wishlist] ([WishlistID]);
 
 
