@@ -46,7 +46,9 @@ angular.module('app').directive('itemline', function ($controller) {
     restrict: 'AE',
     replace: true,
     scope: {
-      item: '='
+      item: '=',
+      isWL: '=',
+      order: '='
     },
     template: '<a href="/item/{{item.ItemID}}">' +
                 '<p><span></span></p>' +
@@ -56,6 +58,7 @@ angular.module('app').directive('itemline', function ($controller) {
                   '<p><span>{{item.ShortDescription}}</span></p>' +
                   '<div ng-bind-html-unsafe="ToTrusted(item.Description, sce)"></div>' +
                   '<p><span>R {{item.Price}}</span></p>' +
+                  '<p ng-hide="{{isWL}}"><span>R {{order.Total}}</span></p>' +
                 '</div>' +
               '</a>'
   };

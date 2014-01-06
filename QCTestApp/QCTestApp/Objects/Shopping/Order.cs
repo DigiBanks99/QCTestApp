@@ -154,6 +154,7 @@ namespace QCTestApp.Objects.Shopping
     #region Data Access
     public override void SetFieldsReader(System.Data.SqlClient.SqlDataReader reader)
     {
+      DateTime? nullDateTime = null;
       _orderID = reader.GetInt32(0);
       _itemID = reader.GetInt32(1);
       _quantity = reader.GetInt32(2);
@@ -161,8 +162,8 @@ namespace QCTestApp.Objects.Shopping
       _total = reader.GetDecimal(4);
       _status = reader.GetString(5).ToCharArray()[0];
       _orderDate = reader.GetDateTime(6);
-      _dispatchDate = reader.GetDateTime(7);
-      _completionDate = reader.GetDateTime(8);
+      _dispatchDate = reader.IsDBNull(reader.GetOrdinal(COL_DISPATCHDATE)) ? nullDateTime : reader.GetDateTime(7);
+      _completionDate = reader.IsDBNull(reader.GetOrdinal(COL_COMPLETIONDATE)) ? nullDateTime : reader.GetDateTime(8);
     }
     #endregion //Data Access
 

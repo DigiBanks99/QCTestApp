@@ -7,6 +7,7 @@ using System.Web.Http;
 using QCTestApp.DataAccess;
 using QCTestApp.Objects;
 using QCTestApp.Objects.Shopping;
+using QCTestApp.FrameWork;
 
 namespace QCTestFE.Controllers
 {
@@ -16,6 +17,9 @@ namespace QCTestFE.Controllers
     [HttpGet]
     public ItemList Get()
     {
+      if (Tools.ItemCache != null)
+        return Tools.ItemCache;
+
       ItemList items = new ItemList();
       string qry = "SELECT * FROM [Shopping].[Item]";
       DataAccess.ReadObjectData(items, qry);      
@@ -26,7 +30,11 @@ namespace QCTestFE.Controllers
     [HttpGet]
     public Item Get(int id)
     {
-      Item item = new Item();
+      Item item = Tools.ItemCache.GetItemByKey(id);
+      if (item != null)
+        return item;
+
+      item = new Item();
       item.ItemID = id;
       DataAccess.ReadObjectData(item);
       return item;

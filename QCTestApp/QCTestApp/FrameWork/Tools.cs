@@ -37,6 +37,8 @@ namespace QCTestApp.FrameWork
     {
       ItemPicturesCache.Initialize();
       UserCache.Initialize();
+      ItemCache.Initialize();
+      CategoryCache.Initialize();
     }
 
     private static User _activeUser = null;
@@ -96,6 +98,36 @@ namespace QCTestApp.FrameWork
           DataAccess.DataAccess.ReadObjectData(_userCache, qry);
         }
         return _userCache;
+      }
+    }
+
+    private static ItemList _itemCache = null;
+    public static ItemList ItemCache
+    {
+      get
+      {
+        if (_itemCache == null)
+        {
+          _itemCache = new ItemList();
+          string qry = "SELECT * FROM [Shopping].[Item]";
+          DataAccess.DataAccess.ReadObjectData(_itemCache, qry);
+        }
+        return _itemCache;
+      }
+    }
+
+    private static CategoryList _categoryCache = null;
+    public static CategoryList CategoryCache
+    {
+      get
+      {
+        if (_categoryCache == null)
+        {
+          _categoryCache = new CategoryList();
+          string qry = "SELECT * FROM [Shopping].[Category]";
+          DataAccess.DataAccess.ReadObjectData(_categoryCache, qry);
+        }
+        return _categoryCache;
       }
     }
     #endregion //Cache Items

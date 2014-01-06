@@ -143,6 +143,7 @@
     <Content Include="Content\app.min.css">
       <DependentUpon>app.less</DependentUpon>
     </Content>
+    <Content Include="Content\app\cart.html" />
     <Content Include="Content\app\item.html" />
     <Content Include="Content\app\wishlist.html" />
     <Content Include="Content\app\wishlistlist.html" />
@@ -594,11 +595,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\ItemPictureController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\WishlistController.cs" />
     <Compile Include="Controllers\WishlistItemController.cs" />
     <Compile Include="Global.asax.cs">

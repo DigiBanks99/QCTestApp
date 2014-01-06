@@ -1,0 +1,11 @@
+﻿<div class="container app-content">
+  <h1>Your Active Cart</h1>
+  <div class="orders">
+    <div ng-repeat="orderItem in orders">
+      <input type="checkbox" ng-model="orderItem.selected" />
+      <itemline item="getItem(orderItem.ItemID)" isWL="false" order="orderItem"></itemline>
+      <input type="text" ng-model="orderItem.Quantity" ng-change="quantityChanged(orderItem.OrderID, orderItem.Quantity)" />
+    </div>
+  </div>
+  <button type="button" class="btn buy-checkout" ng-click="checkout()">Proceed to Checkout</button>
+</div>

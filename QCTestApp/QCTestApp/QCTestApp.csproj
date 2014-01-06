@@ -59,6 +59,7 @@
     <Compile Include="Objects\Shopping\CartOrderRel.cs" />
     <Compile Include="Objects\Shopping\CartOrderRelList.cs" />
     <Compile Include="Objects\Shopping\Category.cs" />
+    <Compile Include="Objects\Shopping\CategoryList.cs" />
     <Compile Include="Objects\Shopping\Item.cs" />
     <Compile Include="Objects\Shopping\ItemPictureList.cs" />
     <Compile Include="Objects\Shopping\ItemList.cs" />

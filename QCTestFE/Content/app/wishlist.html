@@ -1,3 +1,8 @@
-﻿<div ng-controller="WishlistCtrl" class="container app-content">
-  
+﻿<div class="container app-content">
+  <h3>{{wishlist.WishlistName}}</h3>
+  <ul>
+    <li ng-repeat="wlItem in wishlist.WishlistItems">
+      <itemline item="getItem(wlItem.ItemID)" isWL="true"></itemline>
+    </li>
+  </ul>
 </div>

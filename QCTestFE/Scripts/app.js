@@ -14,26 +14,22 @@
       ).when('/item/:id',
         {
           templateUrl: '/Content/app/item.html',
-          controller: ItemCtrl,
-          resolve: function () {
-            console.log('/item/:id has been hit');
-          }
+          controller: ItemCtrl
         }
         ).when('/wishlists',
         {
           templateUrl: '/Content/app/wishlistlist.html',
-          controller: WishlistListCtrl,
-          resolve: function () {
-            console.log('/wishlists has been hit');
-          }
+          controller: WishlistListCtrl
         }
         ).when('/wishlist/:id',
         {
-          templateUrl: '/Content/app/wishlistlist.html',
-          controller: WishlistListCtrl,
-          resolve: function () {
-            console.log('/wishlist/:id has been hit');
-          }
+          templateUrl: '/Content/app/wishlist.html',
+          controller: WishlistCtrl
+        }
+        ).when('/cart',
+        {
+          templateUrl: '/Content/app/cart.html',
+          controller: CartCtrl
         });
 
       // configure html5 to get links working on jsfiddle

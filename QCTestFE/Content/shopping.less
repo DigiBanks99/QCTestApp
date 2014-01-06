@@ -102,14 +102,14 @@
   font-weight: bold;
 }
 
-.wishlist-button {
-  -moz-box-shadow: @button-shadow #fed897;
-  -webkit-box-shadow: @button-shadow #fed897;
-  box-shadow: @button-shadow #fed897;
-  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f6b33d), color-stop(1, #d29105) );
-  background: -moz-linear-gradient( center top, #f6b33d 5%, #d29105 100% );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6b33d', endColorstr='#d29105');
-  background-color: #f6b33d;
+.btn {
+  -moz-box-shadow: @button-shadow #97e299;
+  -webkit-box-shadow: @button-shadow #97e299;
+  box-shadow: @button-shadow #97e299;
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #49d44c), color-stop(1, #09ae0c) );
+  background: -moz-linear-gradient( center top, #49d44c 5%, #09ae0c 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#49d44c', endColorstr='#09ae0c');
+  background-color: #49d44c;
   -webkit-border-top-left-radius: @button-radius;
   -moz-border-radius-topleft: @button-radius;
   border-top-left-radius: @button-radius;
@@ -123,22 +123,33 @@
   -moz-border-radius-bottomleft: 0px;
   border-bottom-left-radius: 0px;
   text-indent: 0px;
-  border: 1px solid #eda933;
+  border: 1px solid #09ae0c;
   display: inline-block;
   color: #ffffff;
   font-family: Arial;
   font-size: @standard-margin-single;
   font-weight: bold;
   font-style: normal;
-  height: 46px;
   line-height: 23px !important;
-  width: 156px;
   text-decoration: none;
   text-align: center;
-  -webkit-text-shadow: 0px 4px 0px #cd8a15;
-  text-shadow: 0px 4px 0px #cd8a15;
+  -webkit-text-shadow: 0px 4px 0px #15cd19;
+  text-shadow: 0px 4px 0px #15cd19;
   padding: 5px 5px 5px 5px;
   margin: @standard-margin-single 5px 5px 5px;
+}
+
+.wishlist-button {
+  -moz-box-shadow: @button-shadow #fed897;
+  -webkit-box-shadow: @button-shadow #fed897;
+  box-shadow: @button-shadow #fed897;
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f6b33d), color-stop(1, #d29105) );
+  background: -moz-linear-gradient( center top, #f6b33d 5%, #d29105 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6b33d', endColorstr='#d29105');
+  background-color: #f6b33d;
+  border: 1px solid #eda933;
+  -webkit-text-shadow: 0px 4px 0px #cd8a15;
+  text-shadow: 0px 4px 0px #cd8a15;
 }
 
 .wishlist-button:hover {

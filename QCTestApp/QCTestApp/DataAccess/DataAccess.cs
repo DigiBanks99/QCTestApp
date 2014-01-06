@@ -128,7 +128,10 @@ namespace QCTestApp.DataAccess
       for (int i = 1; i < obj.ColCount; i++)
       {
         sb.Append(string.Format("{0} [{1}] = @{1}", i < 2 ? string.Empty : ",", obj.ColumnList[i]));
-        cmd.Parameters.Add(new SqlParameter(string.Format("@{0}", obj.ColumnList[i]), obj.GetValue(obj.ColumnList[i])));
+        var value = obj.GetValue(obj.ColumnList[i]);
+        if (value == null)
+          value = DBNull.Value;
+        cmd.Parameters.Add(new SqlParameter(string.Format("@{0}", obj.ColumnList[i]), value));
       }
       sb.Append(" WHERE [" + obj.ColumnList[0] + "] = @" + obj.ColumnList[0] + "0;");
       cmd.Parameters.AddWithValue(string.Format("@{0}0", obj.ColumnList[0]), obj.GetValue(obj.ColumnList[0]));

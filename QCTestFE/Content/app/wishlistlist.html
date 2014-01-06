@@ -1,10 +1,9 @@
-﻿<div class="wishlist-block" ng-controller="WishlistCtrl">
+﻿<div class="wishlist-block" ng-controller="WishlistListCtrl">
   <div ng-repeat="wishlist in wishlistList">
-    <h3>{{wishlist.WishlistName}}</h3>
-    <ul>
-      <li ng-repeat="wlItem in wishlist.WishlistItems">
-        <itemline item="getItem(wlItem.ItemID)"></itemline>
-      </li>
-    </ul>
+    <a href="/wishlist/{{wishlist.WishlistID}}">
+      <h3><span>Name: </span>{{wishlist.WishlistName}}</h3>
+      <h5><span>Category: </span>{{getCategoryNameByID(wishlist.CategoryID)}}</h5>
+      <h5><span>Item Count: </span>{{wishlist.WishlistItems.length}}</h5>
+    </a>
   </div>
 </div>

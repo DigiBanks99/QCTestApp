@@ -34,15 +34,20 @@ namespace QCTestApp.Objects
 
     public IBase GetBaseObjectByKey(int key)
     {
-      if (_baseList == null || _baseList.Count < 1)
-        return null;
-
-      foreach (IBase baseObject in _baseList)
+      foreach (IBase obj in this)
       {
-        if (baseObject.Identity != key)
-          continue;
-        return baseObject;
+        if (obj.Identity == key)
+          return obj;
       }
+      //if (_baseList == null || _baseList.Count < 1)
+      //  return null;
+
+      //foreach (IBase baseObject in _baseList)
+      //{
+      //  if (baseObject.Identity != key)
+      //    continue;
+      //  return baseObject;
+      //}
 
       return null;
     }
