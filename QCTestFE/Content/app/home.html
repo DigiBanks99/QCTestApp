@@ -1,11 +1,12 @@
 ﻿<div class="shopping-list  app-content">
+  <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
   <div class="shopping category">
     <h2><a href="/items/outdoor">Outdoor</a></h2>
-    <div ng-repeat="item in itemList">
+    <div ng-repeat="item in outdrList">
       <a href="/item/{{item.ItemID}}">
         <p><span></span></p>
         <div class="item-tile">
-          <img src="/Content/images/tent{{item.ItemID}}.jpg" />
+          <img src="/Content/images/{{item.ItemID}}.jpg" />
           <h3><span>{{item.ItemName}}</span></h3>
           <p><span>{{item.ShortDescription}}</span></p>
           <div ng-bind-html-unsafe="ToTrusted(item.Description, sce)"></div>
@@ -16,11 +17,11 @@
   </div>
   <div class="shopping category">
     <h2><a href="/items/electronics">Electronics</a></h2>
-    <div ng-repeat="item in itemList">
+    <div ng-repeat="item in electList">
       <a href="#/item/{{item.ItemID}}">
         <p><span></span></p>
         <div class="item-tile">
-          <img src="/Content/images/tent{{item.ItemID}}.jpg" />
+          <img src="/Content/images/{{item.ItemID}}.jpg" />
           <h3><span>{{item.ItemName}}</span></h3>
           <p><span>{{item.ShortDescription}}</span></p>
           <p><span>R {{item.Price}}</span></p>
@@ -30,11 +31,11 @@
   </div>
   <div class="shopping category">
     <h2><a href="/items/furniture">Furniture</a></h2>
-    <div ng-repeat="item in itemList">
+    <div ng-repeat="item in furnList">
       <a href="/item/{{item.ItemID}}">
         <p><span></span></p>
         <div class="item-tile">
-          <img src="/Content/images/tent{{item.ItemID}}.jpg" />
+          <img src="/Content/images/{{item.ItemID}}.jpg" />
           <h3><span>{{item.ItemName}}</span></h3>
           <p><span>{{item.ShortDescription}}</span></p>
           <p><span>R {{item.Price}}</span></p>

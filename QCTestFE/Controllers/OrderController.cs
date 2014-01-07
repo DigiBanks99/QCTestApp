@@ -14,33 +14,54 @@ namespace QCTestFE.Controllers
     {
       // GET api/<controller>
       [HttpGet]
-      public OrderList Get()
+      public Info Get()
       {
-        OrderList orders = new OrderList();
-        string qry = "SELECT * FROM [Shopping].[Order]";
-        DataAccess.ReadObjectData(orders, qry);
-        return orders;
+        Info info = new Info();
+        try
+        {
+          OrderList orders = new OrderList();
+          string qry = "SELECT * FROM [Shopping].[Order]";
+          DataAccess.ReadObjectData(orders, qry);
+          info.ObjectList = orders;
+        }
+        catch (Exception ex)
+        {
+          info.Message = ex.Message;
+          info.Success = false;
+        }
+        return info;
       }
 
       // GET api/<controller>/5
       [HttpGet]
-      public Order Get(int id)
+      public Info Get(int id)
       {
-        Order order = new Order();
-        order.OrderID = id;
-        DataAccess.ReadObjectData(order);
-        return order;
+        Info info = new Info();
+        try
+        {
+          Order order = new Order();
+          order.OrderID = id;
+          DataAccess.ReadObjectData(order);
+          info.Object = order;
+        }
+        catch (Exception ex)
+        {
+          info.Message = ex.Message;
+          info.Success = false;
+        }
+        return info;
       }
 
       [HttpPost]
-      public OrderInfo Post(object[] parameters)
+      public Info Post(object[] parameters)
       {
-        OrderInfo info = new OrderInfo();
+        Info info = new Info();
         try
         {
           if (parameters == null || parameters.Length < 2)
           {
             info.Message = "DEV ERROR: C# - parameters were not sufficiently initialised for OrderController";
+            info.Success = false;
             return info;
           }
 
@@ -50,6 +71,7 @@ namespace QCTestFE.Controllers
           if (orderID == null || quantity == null)
           {
             info.Message = "DEV ERROR: C# - either the OrderID or the Quantity was not initialised for OrderController";
+            info.Success = false;
             return info;
           }
 
@@ -58,21 +80,15 @@ namespace QCTestFE.Controllers
           DataAccess.ReadObjectData(order);
           order.Quantity = quantity;
           order.Save();
-          info.Order = order;
+          info.Object = order;
         }
         catch (Exception ex)
         {
           info.Message = ex.Message;
-          return info;
+          info.Success = false;
         }
 
         return info;
       }
     }
-
-  public class OrderInfo
-  {
-    public Order Order { get; set; }
-    public string Message { get; set; }
-  }
 }

@@ -13,21 +13,41 @@ namespace QCTestFE.Controllers
     public class WishlistController : ApiController
     {
       [HttpGet]
-      public WishlistList Get()
+      public Info Get()
       {
-        WishlistList wishlistList = new WishlistList();
-        string qry = "SELECT * FROM [Shopping].[Wishlist] WHERE [UserID] = " + Tools.ActiveUser.UserID;
-        DataAccess.ReadObjectData(wishlistList, qry);
-        return wishlistList;
+        Info info = new Info();
+        try
+        {
+          WishlistList wishlistList = new WishlistList();
+          string qry = "SELECT * FROM [Shopping].[Wishlist] WHERE [UserID] = " + Tools.ActiveUser.UserID;
+          DataAccess.ReadObjectData(wishlistList, qry);
+          info.ObjectList = wishlistList;
+        }
+        catch (Exception ex)
+        {
+          info.Message = ex.Message;
+          info.Success = false;
+        }
+        return info;
       }
 
       [HttpGet]
-      public Wishlist Get(int id)
+      public Info Get(int id)
       {
-        Wishlist wishlist = new Wishlist();
-        wishlist.WishlistID = id;
-        DataAccess.ReadObjectData(wishlist);
-        return wishlist;
+        Info info = new Info();
+        try
+        {
+          Wishlist wishlist = new Wishlist();
+          wishlist.WishlistID = id;
+          DataAccess.ReadObjectData(wishlist);
+          info.Object = wishlist;
+        }
+        catch (Exception ex)
+        {
+          info.Message = ex.Message;
+          info.Success = false;
+        }
+        return info;
       }
 
       [HttpPost]

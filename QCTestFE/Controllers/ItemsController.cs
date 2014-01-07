@@ -15,37 +15,67 @@ namespace QCTestFE.Controllers
   {
     // GET api/<controller>
     [HttpGet]
-    public ItemList Get()
+    public Info Get()
     {
-      if (Tools.ItemCache != null)
-        return Tools.ItemCache;
+      Info info = new Info();
+      try
+      {
+        if (Tools.ItemCache != null)
+          info.ObjectList = Tools.ItemCache;
 
-      ItemList items = new ItemList();
-      string qry = "SELECT * FROM [Shopping].[Item]";
-      DataAccess.ReadObjectData(items, qry);      
-      return items;
+        ItemList items = new ItemList();
+        string qry = "SELECT * FROM [Shopping].[Item]";
+        DataAccess.ReadObjectData(items, qry);
+        info.ObjectList = items;
+      }
+      catch (Exception ex)
+      {
+        info.Message = ex.Message;
+        info.Success = false;
+      }
+      return info;
     }
 
     // GET api/<controller>/5
     [HttpGet]
-    public Item Get(int id)
+    public Info Get(int id)
     {
-      Item item = Tools.ItemCache.GetItemByKey(id);
-      if (item != null)
-        return item;
+      Info info = new Info();
+      try
+      {
+        Item item = Tools.ItemCache.GetItemByKey(id);
+        if (item != null)
+          info.Object = item;
 
-      item = new Item();
-      item.ItemID = id;
-      DataAccess.ReadObjectData(item);
-      return item;
+        item = new Item();
+        item.ItemID = id;
+        DataAccess.ReadObjectData(item);
+        info.Object = item;
+      }
+      catch (Exception ex)
+      {
+        info.Message = ex.Message;
+        info.Success = false;
+      }
+      return info;
     }
 
     // POST api/<controller>
     [HttpPost]
-    public void Post(Item value)
+    public Info Post(Item value)
     {
-      DataAccess.ReadObjectData(value);
-      value.AddToCart(1);
+      Info info = new Info();
+      try
+      {
+        DataAccess.ReadObjectData(value);
+        value.AddToCart(1);
+      }
+      catch (Exception ex)
+      {
+        info.Message = ex.Message;
+        info.Success = false;
+      }
+      return info;
     }
 
     // PUT api/<controller>/5

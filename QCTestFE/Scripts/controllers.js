@@ -4,26 +4,49 @@ function AccordionCntrl($scope) {
   $scope.expandAccordion = ExpandAccordion();
 }
 
-function HomeCtrl($scope, $http, $sce) {
+function HomeCtrl($scope, $http) {
   apiController = 'api/items';
+
+  $scope.message = "";
+  $scope.success = true;
+  $scope.messageClass = "message-class-" + $scope.success;
+
   $http.get(apiController).then(function (response) {
-    $scope.itemList = response.data;
+    $scope.itemList = response.data.ObjectList;
 
-    //Category Filters
-    $scope.categoryTables = 1
-    $scope.categoryChairs = 2
-    $scope.categoryCouches = 3
-    $scope.categoryFridges = 4
-    $scope.categoryComputers = 5
-    $scope.categoryAppliances = 6
-    $scope.categoryTelevisions = 7
-    $scope.categoryRadios = 8
-    $scope.categoryTents = 9
-    $scope.categoryHiking = 10
-    $scope.categoryCycling = 11
-    $scope.categoryRunning = 12
+    $scope.message = response.data.Message;
+    $scope.success = response.data.Success;
+    $scope.messageClass = "message-class-" + $scope.success;
 
-    $scope.sce = $sce;
+    $scope.outdrList = new Array();
+    $scope.electList = new Array();
+    $scope.furnList = new Array();
+
+    for (var i = 0; i < $scope.itemList.length; i++) {
+      switch($scope.itemList[i].CategoryID)
+      {
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+          $scope.furnList[$scope.furnList.length] = $scope.itemList[i];
+          break;
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+          $scope.electList[$scope.electList.length] = $scope.itemList[i];
+          break;
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+          $scope.outdrList[$scope.outdrList.length] = $scope.itemList[i];
+          break;
+        default:
+          break;
+      }
+    }
   });
 }
 
@@ -31,18 +54,30 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
   $scope.hideWishlists = true;
   apiController = '/api/items/' + $routeParams.id;
 
+  $scope.message = "";
+  $scope.success = true;
+  $scope.messageClass = "message-class-" + $scope.success;
+
   $http.get(apiController).then(function (response) {
-    $scope.ItemID = response.data.ItemID;
-    $scope.ItemName = response.data.ItemName;
-    $scope.ShortDescription = response.data.ShortDescription;
-    $scope.Description = ToTrusted(response.data.Description, $sce);
-    $scope.Price = response.data.Price;
-    $scope.item = response.data;
+    $scope.ItemID = response.data.Object.ItemID;
+    $scope.ItemName = response.data.Object.ItemName;
+    $scope.ShortDescription = response.data.Object.ShortDescription;
+    $scope.Description = ToTrusted(response.data.Object.Description, $sce);
+    $scope.Price = response.data.Object.Price;
+    $scope.item = response.data.Object;
+
+    $scope.message = response.data.Message;
+    $scope.success = response.data.Success;
+    $scope.messageClass = "message-class-" + $scope.success;
   })
 
   if (typeof $scope.wishls === 'undefined') {
     $http.get('/api/wishlist').then(function (response) {
-      $scope.wishls = response.data;
+      $scope.wishls = response.data.ObjectList;
+
+      $scope.message = response.data.Message;
+      $scope.success = response.data.Success;
+      $scope.messageClass = "message-class-" + $scope.success;
     })
   }
 
@@ -56,6 +91,8 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
     $http.post('/api/items', $scope.request)
         .then(function (response) {
           $scope.message = response.data.Message;
+          $scope.success = response.data.Success;
+          $scope.messageClass = "message-class-" + $scope.success;
         }
     );
   };
@@ -77,6 +114,8 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
     $http.post('/api/wishlistitem', $scope.request)
         .then(function (response) {
           $scope.message = response.data.Message;
+          $scope.success = response.data.Success;
+          $scope.messageClass = "message-class-" + $scope.success;
           $scope.hideWishlists = true;
         }
     );
@@ -87,11 +126,17 @@ function WishlistCtrl($scope, $http, $routeParams) {
   var apiController = '/api/wishlist/' + $routeParams.id;
 
   $http.get(apiController).then(function (response) {
-    $scope.wishlist = response.data;
+    $scope.wishlist = response.data.ObjectList;
+    $scope.message = response.data.Message;
+    $scope.success = response.data.Success;
+    $scope.messageClass = "message-class-" + $scope.success;
   });
 
   $http.get('/api/items').then(function (response) {
-    $scope.items = response.data;
+    $scope.items = response.data.ObjectList;
+    $scope.message = response.data.Message;
+    $scope.success = response.data.Success;
+    $scope.messageClass = "message-class-" + $scope.success;
   });
 
   $scope.getItem = function (itemID) {
@@ -112,11 +157,17 @@ function WishlistListCtrl($scope, $http, $routeParams) {
   $scope.category = new Object();
 
   $http.get(apiController).then(function (response) {
-    $scope.wishlistList = response.data;
+    $scope.wishlistList = response.data.ObjectList;
+    $scope.message = response.data.Message;
+    $scope.success = response.data.Success;
+    $scope.messageClass = "message-class-" + $scope.success;
   });
 
   $http.get('/api/category').then(function (response) {
-    $scope.categories = response.data;
+    $scope.categories = response.data.ObjectList;
+    $scope.message = response.data.Message;
+    $scope.success = response.data.Success;
+    $scope.messageClass = "message-class-" + $scope.success;
   });
 
   $scope.getCategoryNameByID = function (categoryID) {
@@ -157,14 +208,18 @@ function WishlistListCtrl($scope, $http, $routeParams) {
 function CartCtrl($scope, $http) {
   apiController = '/api/order';
   $http.get(apiController).then(function (response) {
-    $scope.orders = response.data;
+    $scope.orders = response.data.ObjectList;
+    $scope.success = response.data.Success;
+    $scope.messageClass = "message-class-" + $scope.success;
     $scope.total = 0;
     for (var i = 0; i < $scope.orders.length; i++)
       $scope.total = $scope.total + $scope.orders[i].Total;
   });
 
   $http.get('/api/items').then(function (response) {
-    $scope.items = response.data;
+    $scope.items = response.data.OjbectList;
+    $scope.success = response.data.Success;
+    $scope.messageClass = "message-class-" + $scope.success;
   });
 
   $scope.getItem = function (itemID) {
@@ -181,6 +236,9 @@ function CartCtrl($scope, $http) {
     dataArray[1] = quantity;
     $http.post('/api/order', dataArray).then(function (response) {
       $scope.message = response.data.Message;
+      $scope.success = response.data.Success;
+      $scope.messageClass = "message-class-" + $scope.success;
+
       for (var i = 0; i < $scope.orders.length; i++) {
         if ($scope.orders[i].OrderID == response.data.Order.OrderID)
           $scope.orders[i] = response.data.Order;

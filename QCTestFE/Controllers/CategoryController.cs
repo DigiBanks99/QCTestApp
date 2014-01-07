@@ -13,28 +13,48 @@ namespace QCTestFE.Controllers
     public class CategoryController : ApiController
     {
       [HttpGet]
-      public CategoryList Get()
+      public Info Get()
       {
-        if (Tools.CategoryCache != null)
-          return Tools.CategoryCache;
+        Info info = new Info();
+        try
+        {
+          if (Tools.CategoryCache != null)
+            info.ObjectList = Tools.CategoryCache;
 
-        string qry = "SELECT * FROM [Shopping].[Category]";
-        CategoryList catList = new CategoryList();
-        DataAccess.ReadObjectData(catList, qry);
-        return catList;
+          string qry = "SELECT * FROM [Shopping].[Category]";
+          CategoryList catList = new CategoryList();
+          DataAccess.ReadObjectData(catList, qry);
+          info.ObjectList = catList;
+        }
+        catch (Exception ex)
+        {
+          info.Message = ex.Message;
+          info.Success = false;
+        }
+        return info;
       }
 
       [HttpGet]
-      public Category Get(int id)
+      public Info Get(int id)
       {
-        Category cat = Tools.CategoryCache.GetCategoryByKey(id);
-        if (cat != null)
-          return cat;
+        Info info = new Info();
+        try
+        {
+          Category cat = Tools.CategoryCache.GetCategoryByKey(id);
+          if (cat != null)
+            info.Object = cat;
 
-        cat = new Category();
-        cat.CategoryID = id;
-        DataAccess.ReadObjectData(cat);
-        return cat;
+          cat = new Category();
+          cat.CategoryID = id;
+          DataAccess.ReadObjectData(cat);
+          info.Object = cat;
+        }
+        catch (Exception ex)
+        {
+          info.Message = ex.Message;
+          info.Success = false;
+        }
+        return info;
       }
     }
 }

@@ -4,7 +4,7 @@
     restrict: 'AE',
     replace: true,
     template: '<div class="item-tile">' +
-                  '<img src="/Content/images/tent{{item.ItemID}}.jpg" />' +
+                  '<img src="/Content/images/{{item.ItemID}}.jpg" />' +
                   '<h3>{{item.ItemName}}</h3>' +
                   '<p class="short-description">{{item.ShortDescription}}</p>' +
                   '<div ng-bind-html="item.Description"></div>' +
@@ -53,7 +53,7 @@ angular.module('app').directive('ngItemLine', function () {
     template: '<tr ng-repeat="order in ngOrders">' +
                 '<td class="grid-number">{{order.OrderID}}</td>' + //testline 
                 '<td class="grid-checkbox"><input type="checkbox" ng-model="order.selected" /></td>' +
-                '<td class="grid-image"><a href="/item/{{order.ItemID}}"><img src="/Content/images/tent{{order.ItemID}}.jpg" /></a></td>' +
+                '<td class="grid-image"><a href="/item/{{order.ItemID}}"><img src="/Content/images/{{order.ItemID}}.jpg" /></a></td>' +
                 '<td class="grid-name"><a href="/item/{{order.ItemID}}">{{getItem(order.ItemID, ngItems).ItemName}}</a></td>' +
                 '<td class="grid-price">R {{getItem(order.ItemID, ngItems).Price}}</td>' +
                 '<td ng-hide="{{iswl}}" class="grid-quantity"><input type="text" ng-model="order.Quantity" ng-change="quantityChanged(order.OrderID, order.Quantity)" /></td>' +
