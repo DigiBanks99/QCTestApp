@@ -107,7 +107,7 @@
     text-indent: 0px;
     border: 1px solid #09ae0c;
     display: inline-block;
-    color: #ffffff;
+    color: #FFFFFF;
     font-family: Arial;
     font-size: 15px;
     font-weight: bold;
@@ -169,7 +169,7 @@
     text-indent: 0px;
     border: 1px solid #337fed;
     display: inline-block;
-    color: #ffffff;
+    color: #FFFFFF;
     font-family: Arial;
     font-size: 15px;
     font-weight: bold;
@@ -195,4 +195,106 @@
 .buy-button:active {
     position: relative;
     top: 1px;
+}
+
+.orders {
+    display: block;
+    background: #EEEEEE;
+    margin: 25px;
+}
+
+.orders > h1 {
+    color: #1661AD;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.orders > table {
+    border: 0px none;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    padding: 0px 0px 0px 0px;
+    text-align: left;
+}
+
+.orders > table > tbody > tr {
+    color: #727272;
+    font-size: 12px;
+}
+
+.orders > table > tbody > tr > tr {
+    border-bottom: 1px groove #FFFFFF;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.orders > table > tbody > tr > tr > th {
+    color: #BB5710;
+    font-size: 14px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #d4d4d4));
+    background: -moz-linear-gradient(center top, #ffffff 5%, #d4d4d4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#D4D4D4');
+    background-color: #FFFFFF;
+    margin: 0px 0px 0px 0px !important;
+}
+
+.orders > table > tbody > tr > tr > td {
+    color: #727272;
+    font-size: 12px;
+    margin: 0px 0px 0px 0px !important;
+}
+
+.orders > table > tbody > tr > tr > td > a > img {
+    resize: both;
+    width: 90px;
+    height: 45px;
+}
+
+.orders > table > tbody > tr > tr > td > input[type="text"] {
+    width: 80px;
+    text-align: right;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #eeeeee), color-stop(1, #ffffff));
+    background: -moz-linear-gradient(center top, #eeeeee 5%, #ffffff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF');
+    background-color: #EEEEEE;
+    border: 1px inset;
+}
+
+.grid-checkbox,
+.grid-number {
+    width: 20px;
+}
+
+.grid-image {
+    width: 110px;
+}
+
+.grid-name {
+    width: 300px;
+}
+
+.grid-price {
+    width: 100px;
+    text-align: right;
+}
+
+.grid-quantity {
+    width: 90px;
+}
+
+.grid-total-space {
+    width: 550px;
+}
+
+.grid-total {
+    width: 100px;
+    font-weight: bold;
+    font-size: 14px !important;
+    text-align: right;
+}
+
+.grid-total-desc {
+    width: 90px;
+    font-weight: bold;
+    font-size: 14px !important;
 }

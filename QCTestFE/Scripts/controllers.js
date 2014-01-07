@@ -126,6 +126,9 @@ function CartCtrl($scope, $http) {
   apiController = '/api/order';
   $http.get(apiController).then(function (response) {
     $scope.orders = response.data;
+    $scope.total = 0;
+    for (var i = 0; i < $scope.orders.length; i++)
+      $scope.total = $scope.total + $scope.orders[i].Total;
   });
 
   $http.get('/api/items').then(function (response) {

@@ -28,6 +28,7 @@ obj/
 [Dd]ebug*/
 [Rr]elease*/
 Ankh.NoLoad
+sql/[Dd]ebug*/
 
 #Tooling
 _ReSharper*/
