@@ -5,12 +5,12 @@
       <table>
         <tbody>
           <tr ng-cartitem-headers></tr>
-          <tr ng-item-line iswl="false" orders="orders" items="items"></tr>
+          <tr ng-item-line ng-iswl="false" ng-orders="orders" ng-items="items"></tr>
           <tr ng-cartitem-total ng-total="total"></tr>
         </tbody>
       </table>
       <button type="button" class="btn buy-checkout" ng-click="checkout()">Proceed to Checkout</button>
     </div>
-    <div  ng-hide="true">{{message}}</div>
+    <div ng-hide="true">{{message}}</div>
   </div>
 </div>

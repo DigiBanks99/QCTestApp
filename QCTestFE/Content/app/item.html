@@ -8,6 +8,8 @@
       <li ng-repeat="wishlist in wishls">
         <button type="button" class="btn wishlist-text" ng-click="addToWishlist(wishlist)">{{wishlist.WishlistName}}</button>
       </li>
+      <li>
+        <a href="/newwishlist/{{wishlist}}" class="btn wishlist-new">New Wishlist</a></li>
     </ul>
   </div>
 </div>

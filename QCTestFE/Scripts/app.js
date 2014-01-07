@@ -16,21 +16,27 @@
           templateUrl: '/Content/app/item.html',
           controller: ItemCtrl
         }
-        ).when('/wishlists',
+      ).when('/wishlists',
         {
           templateUrl: '/Content/app/wishlistlist.html',
           controller: WishlistListCtrl
         }
-        ).when('/wishlist/:id',
+      ).when('/wishlist/:id',
         {
           templateUrl: '/Content/app/wishlist.html',
           controller: WishlistCtrl
         }
-        ).when('/cart',
+      ).when('/cart',
         {
           templateUrl: '/Content/app/cart.html',
           controller: CartCtrl
-        });
+        }
+      ).when('/newwishlist',
+        {
+          templateUrl: '/Content/app/newwishlist.html',
+          controller: WishlistListCtrl
+        }
+      );
 
       // configure html5 to get links working on jsfiddle
       $locationProvider.html5Mode(true);

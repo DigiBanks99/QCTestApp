@@ -105,6 +105,12 @@ function WishlistCtrl($scope, $http, $routeParams) {
 function WishlistListCtrl($scope, $http, $routeParams) {
   var apiController = '/api/wishlist';
 
+  $scope.message = "";
+  $scope.success = true;
+  $scope.messageClass = "message-class-" + $scope.success;
+
+  $scope.category = new Object();
+
   $http.get(apiController).then(function (response) {
     $scope.wishlistList = response.data;
   });
@@ -119,6 +125,32 @@ function WishlistListCtrl($scope, $http, $routeParams) {
         return $scope.categories[i].CategoryName;
     }
     return "Uncategorised";
+  };
+
+  $scope.setCategory = function (cat) {
+    $scope.category = cat;
+    $(".listbox-category li").click(function () {
+      $(".listbox-category li").not(this).each(function () {
+        $(this).css("background-color", "white");
+        $(this).css("color", "black");
+      });
+      $(this).css("background-color", "#1661AD");
+      $(this).css("color", "white");
+    });
+  };
+
+  $scope.createWishlist = function () {
+    var info = new Object();
+    info.WishlistName = $scope.wlname;
+    if ($scope.category != null)
+      info.CategoryID = $scope.category.CategoryID;
+    else
+      info.CategoryID = null;
+    $http.post('/api/wishlist', info).then(function (response) {
+      $scope.message = response.data.Message;
+      $scope.success = response.data.Success;
+      $scope.messageClass = "message-class-" + $scope.success;
+    });
   };
 }
 
@@ -148,7 +180,7 @@ function CartCtrl($scope, $http) {
     dataArray[0] = orderID;
     dataArray[1] = quantity;
     $http.post('/api/order', dataArray).then(function (response) {
-      $scope.Message = response.data.Message;
+      $scope.message = response.data.Message;
       for (var i = 0; i < $scope.orders.length; i++) {
         if ($scope.orders[i].OrderID == response.data.Order.OrderID)
           $scope.orders[i] = response.data.Order;
@@ -178,4 +210,8 @@ function GetItem(itemID, itemList) {
     if (itemList[i].ItemID == itemID)
       return itemList[i];
   }
+}
+
+function GetMessageClass() {
+  return $scope.message + $scope.success;
 }

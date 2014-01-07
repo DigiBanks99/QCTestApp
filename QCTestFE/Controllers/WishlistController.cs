@@ -29,5 +29,34 @@ namespace QCTestFE.Controllers
         DataAccess.ReadObjectData(wishlist);
         return wishlist;
       }
+
+      [HttpPost]
+      public Info Post(WishlistInfo obj)
+      {
+        Info info = new Info();
+        try
+        {
+          Wishlist wl = new Wishlist();
+          wl.WishlistName = obj.WishlistName;
+          wl.CategoryID = obj.CategoryID;
+          wl.Code = Tools.GenCode(Tools.ActiveUser.UserName);
+          wl.UserID = Tools.ActiveUser.UserID;
+          wl.DateCreated = DateTime.Now;
+          wl.Save();
+        }
+        catch (Exception ex)
+        {
+          info.Message = ex.Message;
+          info.Success = false;
+        }
+
+        return info;
+      }
     }
+
+  public class WishlistInfo : Info
+  {
+    public string WishlistName { get; set; }
+    public int CategoryID { get; set; }
+  }
 }

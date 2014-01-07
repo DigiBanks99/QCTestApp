@@ -24,7 +24,7 @@ namespace QCTestApp.DataAccess
       catch (Exception ex)
       {
         Console.WriteLine(ex.Message);
-        return null;
+        throw ex;
       }
     }
 
@@ -40,6 +40,7 @@ namespace QCTestApp.DataAccess
       catch (Exception ex)
       {
         Console.WriteLine(ex.Message);
+        throw ex;
       }
       finally
       {
@@ -66,6 +67,7 @@ namespace QCTestApp.DataAccess
       catch (Exception ex)
       {
         Console.WriteLine(ex.Message);
+        throw ex;
       }
       finally
       {
@@ -84,8 +86,8 @@ namespace QCTestApp.DataAccess
       }
       catch (Exception ex)
       {
-        System.Console.WriteLine(ex.Message);
-        return -1;
+        Console.WriteLine(ex.Message);
+        throw ex;
       }
     }
 
@@ -176,7 +178,7 @@ namespace QCTestApp.DataAccess
       catch (Exception ex)
       {
         Console.WriteLine(ex.Message);
-        return false;
+        throw ex;
       }
     }
 
@@ -203,7 +205,7 @@ namespace QCTestApp.DataAccess
       catch (Exception ex)
       {
         Console.WriteLine(ex.Message);
-        return false;
+        throw ex;
       }
     }
 

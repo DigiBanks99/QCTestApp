@@ -46,16 +46,16 @@ angular.module('app').directive('ngItemLine', function () {
     restrict: 'A',
     replace: false,
     scope: {
-      iswl: '=',
-      orders: '=',
-      items: '='
+      ngIswl: '=',
+      ngOrders: '=',
+      ngItems: '='
     },
-    template: '<tr ng-repeat="order in orders">' +
+    template: '<tr ng-repeat="order in ngOrders">' +
                 '<td class="grid-number">{{order.OrderID}}</td>' + //testline 
                 '<td class="grid-checkbox"><input type="checkbox" ng-model="order.selected" /></td>' +
                 '<td class="grid-image"><a href="/item/{{order.ItemID}}"><img src="/Content/images/tent{{order.ItemID}}.jpg" /></a></td>' +
-                '<td class="grid-name"><a href="/item/{{order.ItemID}}">{{getItem(order.ItemID, items).ItemName}}</a></td>' +
-                '<td class="grid-price">R {{getItem(order.ItemID, items).Price}}</td>' +
+                '<td class="grid-name"><a href="/item/{{order.ItemID}}">{{getItem(order.ItemID, ngItems).ItemName}}</a></td>' +
+                '<td class="grid-price">R {{getItem(order.ItemID, ngItems).Price}}</td>' +
                 '<td ng-hide="{{iswl}}" class="grid-quantity"><input type="text" ng-model="order.Quantity" ng-change="quantityChanged(order.OrderID, order.Quantity)" /></td>' +
                 '<td ng-hide="{{iswl}}" class="grid-price">R {{order.Total}}</td>' +
               '</tr>',
@@ -116,5 +116,24 @@ angular.module('app').directive('ngCartitemTotal', function () {
                 '<td class="grid-total-desc">Cart Total</td>' +
                 '<td class="grid-total">R {{ngTotal}}</td>' +
               '</tr>'
+  }
+});
+
+angular.module('app').directive('ngCategoryListSelector', function () {
+  return {
+    restrict: 'EA',
+    replace: false,
+    scope: {
+      ngCategories: '=',
+      ngCategory: '&'
+    },
+    template: '<ul id="cat-list">' +
+                '<li ng-repeat="cat in ngCategories" ng-click="setCategory(cat)">AS {{cat.CategoryName}}</li>' +
+              '</ul>',
+    link: function (scope, iElements, iAttrs) {
+      scope.setCategory = function (cat) {
+        ngCategory = cat;
+      };
+    }
   }
 });

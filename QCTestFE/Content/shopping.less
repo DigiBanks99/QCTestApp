@@ -319,3 +319,39 @@
   font-weight: bold;
   font-size: 14px !important;
 }
+
+.wishlist-new {
+  display: block;
+  font-weight: bold;
+  float: left;
+  clear: left;
+
+  > span {
+    display: inline;
+
+    > input[type="text"] {
+      width: 80px;
+      text-align: right;
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #EEEEEE), color-stop(1, #FFFFFF));
+      background: -moz-linear-gradient(center top, #EEEEEE 5%, #FFFFFF 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEEEEE', endColorstr='#FFFFFF');
+      background-color: #EEEEEE;
+      border: 1px inset;
+    }
+  }
+
+  > button {
+    float: left;
+    clear: left;
+  }
+}
+
+.listbox-category {
+  font-size: 12px;
+  font-weight: normal;
+  border: groove;
+
+  > li {
+    list-style-type: none;
+  }
+}
