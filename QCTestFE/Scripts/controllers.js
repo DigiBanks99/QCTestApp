@@ -69,56 +69,50 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
     $scope.message = response.data.Message;
     $scope.success = response.data.Success;
     $scope.messageClass = "message-class-" + $scope.success;
-  })
-
-  if (typeof $scope.wishls === 'undefined') {
+  }).success(function (data, status, headers, config) {
+    $scope.wishls = new Object();
     $http.get('/api/wishlist').then(function (response) {
       $scope.wishls = response.data.ObjectList;
 
       $scope.message = response.data.Message;
       $scope.success = response.data.Success;
       $scope.messageClass = "message-class-" + $scope.success;
-    })
-  }
-
-  $scope.buy = function () {
-    var itemInfo = new Object();
-    if ($scope.item == null || $scope.item.ItemID == null)
-      itemInfo.ItemID = $routeParams.id;
-    else 
-      itemInfo.ItemID = $scope.item.ItemID;
-    $scope.request = itemInfo;
-    $http.post('/api/items', $scope.request)
-        .then(function (response) {
+    }).success(function (data, status, headers, config) {
+      $scope.buy = function () {
+        var itemInfo = new Object();
+        if ($scope.item == null || $scope.item.ItemID == null)
+          itemInfo.ItemID = $routeParams.id;
+        else
+          itemInfo.ItemID = $scope.item.ItemID;
+        $scope.request = itemInfo;
+        $http.post('/api/items', $scope.request).then(function (response) {
           $scope.message = response.data.Message;
           $scope.success = response.data.Success;
           $scope.messageClass = "message-class-" + $scope.success;
-        }
-    );
-  };
+
+          $scope.addToWishlist = function AddToWishlist(wishlist) {
+            var dataArray = new Array();
+            if ($scope.item == null || wishlist == null) {
+              console.log("DEV Error: JS - item or wishlist is null");
+              return;
+            }
+            dataArray[0] = $scope.item.ItemID;
+            dataArray[1] = wishlist.WishlistID;
+            $scope.request = dataArray;
+            $http.post('/api/wishlistitem', $scope.request).then(function (response) {
+              $scope.message = response.data.Message;
+              $scope.success = response.data.Success;
+              $scope.messageClass = "message-class-" + $scope.success;
+              $scope.hideWishlists = true;
+            });
+          };
+        });
+      };
+    })
+  })
 
   $scope.showWishlists = function () {
     $scope.hideWishlists = false;
-  };
-
-  $scope.addToWishlist = function AddToWishlist(wishlist) {
-    var dataArray = new Array();
-    if ($scope.item == null || wishlist == null)
-    {
-      console.log("DEV Error: JS - item or wishlist is null");
-      return;
-    }
-    dataArray[0] = $scope.item.ItemID;
-    dataArray[1] = wishlist.WishlistID;
-    $scope.request = dataArray;
-    $http.post('/api/wishlistitem', $scope.request)
-        .then(function (response) {
-          $scope.message = response.data.Message;
-          $scope.success = response.data.Success;
-          $scope.messageClass = "message-class-" + $scope.success;
-          $scope.hideWishlists = true;
-        }
-    );
   };
 }
 
