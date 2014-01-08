@@ -194,9 +194,8 @@ function WishlistCtrl($scope, $http, $routeParams, $rootScope) {
   }
 
   $scope.addToCart = function () {
-    var info = new Object();
-    info.CheckedList = $scope.checkedList;
-    if (info.CheckedList != null)
+    var info= $scope.checkedList;
+    if (info != null)
     {
       $http.post('/api/addtocart', info).then(function (response) {
         $scope.message = response.data.Message;

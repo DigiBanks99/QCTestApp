@@ -49,7 +49,7 @@ angular.module('app').directive('ngItemLine', function () {
       ngIswl: '=',
       ngOrders: '=',
       ngItems: '=',
-      ngCheckedList: '@'
+      ngCheckedList: '@checkedList'
     },
     template: '<tr ng-repeat="order in ngOrders">' +
                 '<td class="grid-number">{{order.OrderID}}</td>' + //testline 
@@ -131,6 +131,7 @@ angular.module('app').directive('ngWishlist', function () {
                 '<td class="grid-price">R {{getItem(wlitem.ItemID, ngItems).Price}}</td>' +
               '</tr>',
     link: function (scope, iElement, iAttrs) {
+      scope.ngCheckedList = iAttrs.ngCheckedList;
       scope.getItem = function (itemID, items) {
         for (var i = 0; i < items.length; i++) {
           if (items[i].ItemID == itemID)
@@ -162,6 +163,8 @@ angular.module('app').directive('ngWishlist', function () {
           }
         }
       };
+
+      scope.$apply();
     }
   }
 });
