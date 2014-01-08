@@ -145,6 +145,7 @@
     </Content>
     <Content Include="Content\app\cart.html" />
     <Content Include="Content\app\item.html" />
+    <Content Include="Content\app\items.html" />
     <Content Include="Content\app\newwishlist.html" />
     <Content Include="Content\app\wishlist.html" />
     <Content Include="Content\app\wishlistlist.html" />

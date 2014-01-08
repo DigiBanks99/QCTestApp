@@ -19,7 +19,10 @@ namespace QCTestFE.Controllers
         try
         {
           if (Tools.CategoryCache != null)
+          {
             info.ObjectList = Tools.CategoryCache;
+            return info;
+          }
 
           string qry = "SELECT * FROM [Shopping].[Category]";
           CategoryList catList = new CategoryList();
@@ -42,7 +45,10 @@ namespace QCTestFE.Controllers
         {
           Category cat = Tools.CategoryCache.GetCategoryByKey(id);
           if (cat != null)
+          {
             info.Object = cat;
+            return info;
+          }
 
           cat = new Category();
           cat.CategoryID = id;

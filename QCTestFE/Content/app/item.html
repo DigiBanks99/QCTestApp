@@ -1,6 +1,6 @@
 ﻿<div ng-controller="ItemCtrl" class="container app-content">
-  <itemtile item="item"></itemtile>
-
+  <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
+  <div ng-itemtile ng-item="item"></div>
   <button type="button" class="btn wishlist-button" ng-click="showWishlists()">Add to Wishlist</button>
   <button type="button" class="btn buy-button" ng-click="buy()">Buy</button>
   <div class="wishlist-text" ng-hide="hideWishlists">

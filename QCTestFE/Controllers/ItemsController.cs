@@ -21,7 +21,10 @@ namespace QCTestFE.Controllers
       try
       {
         if (Tools.ItemCache != null)
+        {
           info.ObjectList = Tools.ItemCache;
+          return info;
+        }
 
         ItemList items = new ItemList();
         string qry = "SELECT * FROM [Shopping].[Item]";
@@ -45,12 +48,49 @@ namespace QCTestFE.Controllers
       {
         Item item = Tools.ItemCache.GetItemByKey(id);
         if (item != null)
+        {
           info.Object = item;
+          return info;
+        }
 
         item = new Item();
         item.ItemID = id;
         DataAccess.ReadObjectData(item);
         info.Object = item;
+      }
+      catch (Exception ex)
+      {
+        info.Message = ex.Message;
+        info.Success = false;
+      }
+      return info;
+    }
+
+    [HttpGet]
+    public Info Get(string categoryName)
+    {
+      Info info = new Info();
+      try
+      {
+        ItemList itemList = new ItemList();
+        
+        foreach (var item in itemList)
+        {
+          if (Tools.CategoryCache.GetCategoryByKey(item.CategoryID).CategoryName != categoryName)
+            continue;
+
+          itemList.Add(item);
+        }
+
+        if (itemList != null)
+        {
+          info.ObjectList = itemList;
+          return info;
+        }
+
+        string qry = string.Format("SELECT * FROM [Shopping].[Item] WHERE [CategoryID] = '{0}'", Tools.CategoryCache.GetCategoryByName(categoryName));
+        DataAccess.ReadObjectData(itemList, qry);
+        info.ObjectList = itemList;
       }
       catch (Exception ex)
       {

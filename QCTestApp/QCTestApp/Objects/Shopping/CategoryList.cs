@@ -21,5 +21,13 @@ namespace QCTestApp.Objects.Shopping
     {
       return base.GetBaseObjectByKey(key) as Category;
     }
+
+    public Category GetCategoryByName(string name)
+    {
+      foreach (var cat in this)
+        if (cat.CategoryName.ToUpper() == name.ToUpper())
+          return cat;
+      return null;
+    }
   }
 }

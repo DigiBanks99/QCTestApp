@@ -1,18 +1,18 @@
 ﻿angular.module('app')
-.directive('itemtile', ['$sce', function ($controller, $sce) {
+.directive('ngItemtile', ['$sce', function ($controller, $sce) {
   return {
     restrict: 'AE',
     replace: true,
-    template: '<div class="item-tile">' +
-                  '<img src="/Content/images/{{item.ItemID}}.jpg" />' +
-                  '<h3>{{item.ItemName}}</h3>' +
-                  '<p class="short-description">{{item.ShortDescription}}</p>' +
-                  '<div ng-bind-html="item.Description"></div>' +
-                  '<p class="price">R {{item.Price}}</p>' +
-                '</div>',
     scope: {
-      item: '='
+      ngItem: '='
     },
+    template: '<div class="item-tile">' +
+                  '<img src="/Content/images/{{ngItem.ItemID}}.jpg" />' +
+                  '<h3>{{ngItem.ItemName}}</h3>' +
+                  '<p class="short-description">{{ngItem.ShortDescription}}</p>' +
+                  '<div ng-bind-html="ngItem.Description"></div>' +
+                  '<p class="price">R {{ngItem.Price}}</p>' +
+                '</div>',
     link: function (scope, element, attrs) {
       scope.getSafeHtml = function (html) {
         return $sce.trustAsHTML(html);
@@ -60,6 +60,7 @@ angular.module('app').directive('ngItemLine', function () {
                 '<td ng-hide="{{iswl}}" class="grid-price">R {{order.Total}}</td>' +
               '</tr>',
     controller: ['$scope', '$http', function ($scope, $http) {
+
       $scope.quantityChanged = function (orderID, quantity) {
         var dataArray = new Array();
         if (orderID == null || quantity == null) {
@@ -71,8 +72,8 @@ angular.module('app').directive('ngItemLine', function () {
         $http.post('/api/order', dataArray).then(function (response) {
           $scope.Message = response.data.Message;
           for (var i = 0; i < $scope.orders.length; i++) {
-            if ($scope.orders[i].OrderID == response.data.Order.OrderID)
-              $scope.orders[i] = response.data.Order;
+            if ($scope.orders[i].OrderID == response.data.Object.OrderID)
+              $scope.orders[i] = response.data.Object;
           }
         });
       }

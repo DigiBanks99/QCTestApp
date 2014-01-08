@@ -1,4 +1,5 @@
 ﻿<div class="container app-content">
+  <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
   <h3>{{wishlist.WishlistName}}</h3>
   <ul>
     <li ng-repeat="wlItem in wishlist.WishlistItems">

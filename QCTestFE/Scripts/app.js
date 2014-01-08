@@ -36,6 +36,11 @@
           templateUrl: '/Content/app/newwishlist.html',
           controller: WishlistListCtrl
         }
+      ).when('/items/category/:cat',
+        {
+          templateUrl: '/Content/app/items.html',
+          controller: ItemCategoryCtrl
+        }
       );
 
       // configure html5 to get links working on jsfiddle
