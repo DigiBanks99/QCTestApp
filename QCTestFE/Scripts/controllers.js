@@ -110,6 +110,14 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
     $scope.message = response.data.Message;
     $scope.success = response.data.Success;
     $scope.messageClass = "message-class-" + $scope.success;
+    $(".listbox li").click(function () {
+      $(".listbox li").not(this).each(function () {
+        $(this).css("background-color", "white");
+        $(this).css("color", "black");
+      });
+      $(this).css("background-color", "#1661AD");
+      $(this).css("color", "white");
+    });
   })
 
   $scope.buy = function () {
@@ -158,13 +166,14 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
 
 function WishlistCtrl($scope, $http, $routeParams, $rootScope) {
   var apiController = '/api/wishlist/' + $routeParams.id;
+  $scope.checkedList = "";
 
   $scope.message = "";
   $scope.success = true;
   $scope.messageClass = "message-class-" + $scope.success;
 
   $http.get(apiController).then(function (response) {
-    $scope.wishlist = response.data.ObjectList;
+    $scope.wishlist = response.data.Object;
     $scope.message = response.data.Message;
     $scope.success = response.data.Success;
     $scope.messageClass = "message-class-" + $scope.success;
@@ -184,76 +193,22 @@ function WishlistCtrl($scope, $http, $routeParams, $rootScope) {
     $scope.items = $rootScope.itemList;
   }
 
-  $scope.getItem = function (itemID) {
-    for (var i = 0; i < $scope.items.length; i++) {
-      if ($scope.items[i].ItemID == itemID)
-        return $scope.items[i];
-    }
-  };
-}
-
-function WishlistListCtrl($scope, $http, $routeParams, $rootScope) {
-  var apiController = '/api/wishlist';
-
-  $scope.message = "";
-  $scope.success = true;
-  $scope.messageClass = "message-class-" + $scope.success;
-
-  $scope.category = new Object();
-
-  $http.get(apiController).then(function (response) {
-    $scope.wishlistList = response.data.ObjectList;
-    $scope.message = response.data.Message;
-    $scope.success = response.data.Success;
-    $scope.messageClass = "message-class-" + $scope.success;
-  });
-
-  if (typeof $rootScope.categories === 'undefined' || $rootScope.categories.length == 0) {
-    $http.get('/api/category').then(function (response) {
-      $scope.categories = response.data.ObjectList;
-      $rootScope.categories = $scope.categories;
-      $scope.message = response.data.Message;
-      $scope.success = response.data.Success;
-      $scope.messageClass = "message-class-" + $scope.success;
-    });
-  }
-  else {
-    $scope.categories = $rootScope.categories;
-  }
-
-  $scope.getCategoryNameByID = function (categoryID) {
-    for (var i = 0; i < $scope.categories.length; i++) {
-      if ($scope.categories[i].CategoryID == categoryID)
-        return $scope.categories[i].CategoryName;
-    }
-    return "Uncategorised";
-  };
-
-  $scope.setCategory = function (cat) {
-    $scope.category = cat;
-    $(".listbox-category li").click(function () {
-      $(".listbox-category li").not(this).each(function () {
-        $(this).css("background-color", "white");
-        $(this).css("color", "black");
-      });
-      $(this).css("background-color", "#1661AD");
-      $(this).css("color", "white");
-    });
-  };
-
-  $scope.createWishlist = function () {
+  $scope.addToCart = function () {
     var info = new Object();
-    info.WishlistName = $scope.wlname;
-    if ($scope.category != null)
-      info.CategoryID = $scope.category.CategoryID;
-    else
-      info.CategoryID = null;
-    $http.post('/api/wishlist', info).then(function (response) {
-      $scope.message = response.data.Message;
-      $scope.success = response.data.Success;
-      $scope.messageClass = "message-class-" + $scope.success;
-    });
-  };
+    info.CheckedList = $scope.checkedList;
+    if (info.CheckedList != null)
+    {
+      $http.post('/api/addtocart', info).then(function (response) {
+        $scope.message = response.data.Message;
+        $scope.success = response.data.Success;
+        $scope.messageClass = "message-class-" + $scope.success;
+        if ($scope.success == true) {
+          $scope.message = "The items have been added to your cart.";
+          $scope.success = false;
+        }
+      });
+    }
+  }
 }
 
 function WishlistListCtrl($scope, $http, $routeParams, $rootScope) {
@@ -295,8 +250,8 @@ function WishlistListCtrl($scope, $http, $routeParams, $rootScope) {
 
   $scope.setCategory = function (cat) {
     $scope.category = cat;
-    $(".listbox-category li").click(function () {
-      $(".listbox-category li").not(this).each(function () {
+    $(".listbox li").click(function () {
+      $(".listbox li").not(this).each(function () {
         $(this).css("background-color", "white");
         $(this).css("color", "black");
       });
@@ -322,6 +277,7 @@ function WishlistListCtrl($scope, $http, $routeParams, $rootScope) {
 
 function CartCtrl($scope, $http, $rootScope) {
   apiController = '/api/order';
+  $scope.checkedList = "";
 
   $scope.message = "";
   $scope.success = true;

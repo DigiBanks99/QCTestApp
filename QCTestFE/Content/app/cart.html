@@ -1,12 +1,12 @@
-﻿<div class="container app-content">
+﻿<div class="app-content">
   <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
   <div class="container" style="display: inline; overflow: auto; float: left;">
     <div class="orders">
       <h1>Your Active Cart</h1>
       <table>
         <tbody>
-          <tr ng-cartitem-headers></tr>
-          <tr ng-item-line ng-iswl="false" ng-orders="orders" ng-items="items"></tr>
+          <tr ng-cartitem-headers ng-iswl="false"></tr>
+          <tr ng-item-line ng-iswl="false" ng-orders="orders" ng-items="items" ng-checked-list="checkedList"></tr>
           <tr ng-cartitem-total ng-total="total"></tr>
         </tbody>
       </table>

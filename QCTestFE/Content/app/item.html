@@ -1,15 +1,18 @@
-﻿<div ng-controller="ItemCtrl" class="container app-content">
-  <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
-  <div ng-itemtile ng-item="item"></div>
-  <button type="button" class="btn wishlist-button" ng-click="showWishlists()">Add to Wishlist</button>
-  <button type="button" class="btn buy-button" ng-click="buy()">Buy</button>
-  <div class="wishlist-text" ng-hide="hideWishlists">
-    <ul>
-      <li ng-repeat="wishlist in wishls">
-        <button type="button" class="btn wishlist-text" ng-click="addToWishlist(wishlist)">{{wishlist.WishlistName}}</button>
-      </li>
-      <li>
-        <a href="/newwishlist/{{wishlist}}" class="btn wishlist-new">New Wishlist</a></li>
-    </ul>
+﻿<div class="app-content container">
+  <div class="container">
+    <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
+  </div>
+  <div class="container">
+    <div ng-itemtile ng-item="item"></div>
+    <div class="container">
+      <button type="button" class="btn wishlist-button" ng-click="showWishlists()">Add to Wishlist</button>
+      <button type="button" class="btn buy-button" ng-click="buy()">Buy</button>
+    </div>
+    <div class="wishlist-new" ng-hide="hideWishlists">
+      <ul class="listbox">
+        <li ng-repeat="wishlist in wishls" ng-click="addToWishlist(wishlist)">{{wishlist.WishlistName}}</li>
+      </ul>
+      <a href="/newwishlist/{{wishlist}}" class="btn wishlist-new">New Wishlist</a>
+    </div>
   </div>
 </div>

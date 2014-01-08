@@ -150,6 +150,28 @@
   text-shadow: 0px 4px 0px #15cd19;
   padding: 5px 5px 5px 5px;
   margin: @standard-margin-single 5px 5px 5px;
+  width: 180px;
+}
+
+.btn:visited,
+.btn:focus,
+.btn:active {
+  -webkit-border-top-left-radius: @button-radius;
+  -moz-border-radius-topleft: @button-radius;
+  border-top-left-radius: @button-radius;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: @button-radius;
+  -moz-border-radius-bottomright: @button-radius;
+  border-bottom-right-radius: @button-radius;
+  -webkit-border-bottom-left-radius: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  border-bottom-left-radius: 0px;
+  text-indent: 0px;
+  border: 1px solid #45cb47;
+  position: relative;
+  top: 1px;
 }
 
 .wishlist-button {
@@ -170,11 +192,6 @@
   background: -moz-linear-gradient( center top, #d29105 5%, #f6b33d 100% );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d29105', endColorstr='#f6b33d');
   background-color: #d29105;
-}
-
-.wishlist-button:active {
-  position: relative;
-  top: 1px;
 }
 
 .buy-button {
@@ -224,6 +241,7 @@
 }
 
 .buy-button:active {
+  border: 1px solid @buy-button-color-a;
   position: relative;
   top: 1px;
 }
@@ -356,10 +374,11 @@
   }
 }
 
-.listbox-category {
+.listbox {
   font-size: 12px;
   font-weight: normal;
   border: groove;
+  background-color: white;
 
   > li {
     list-style-type: none;

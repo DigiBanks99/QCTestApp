@@ -1,10 +1,10 @@
-﻿<div class="container app-content">
+﻿<div class="app-content">
   <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
   <div class="wishlist-new">
     <span>Name: <input type="text" ng-model="wlname" /></span>
     <span>
       Category:
-      <ul class="listbox-category">
+      <ul class="listbox">
         <li ng-repeat="cat in categories" ng-click="setCategory(cat)">{{cat.CategoryName}}</li>
       </ul>
     </span>

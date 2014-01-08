@@ -48,11 +48,12 @@ angular.module('app').directive('ngItemLine', function () {
     scope: {
       ngIswl: '=',
       ngOrders: '=',
-      ngItems: '='
+      ngItems: '=',
+      ngCheckedList: '@'
     },
     template: '<tr ng-repeat="order in ngOrders">' +
                 '<td class="grid-number">{{order.OrderID}}</td>' + //testline 
-                '<td class="grid-checkbox"><input type="checkbox" ng-model="order.selected" /></td>' +
+                '<td class="grid-checkbox"><input type="checkbox" ng-model="order.selected"  ng-click="tick(order.ItemID)" /></td>' +
                 '<td class="grid-image"><a href="/item/{{order.ItemID}}"><img src="/Content/images/{{order.ItemID}}.jpg" /></a></td>' +
                 '<td class="grid-name"><a href="/item/{{order.ItemID}}">{{getItem(order.ItemID, ngItems).ItemName}}</a></td>' +
                 '<td class="grid-price">R {{getItem(order.ItemID, ngItems).Price}}</td>' +
@@ -71,9 +72,9 @@ angular.module('app').directive('ngItemLine', function () {
         dataArray[1] = quantity;
         $http.post('/api/order', dataArray).then(function (response) {
           $scope.Message = response.data.Message;
-          for (var i = 0; i < $scope.orders.length; i++) {
-            if ($scope.orders[i].OrderID == response.data.Object.OrderID)
-              $scope.orders[i] = response.data.Object;
+          for (var i = 0; i < $scope.ngOrders.length; i++) {
+            if ($scope.ngOrders[i].OrderID == response.data.Object.OrderID)
+              $scope.ngOrders[i] = response.data.Object;
           }
         });
       }
@@ -85,6 +86,82 @@ angular.module('app').directive('ngItemLine', function () {
             return items[i];
         }
       };
+
+      scope.tick = function (itemID) {
+        if (typeof scope.ngCheckedList === 'undefined')
+          scope.ngCheckedList = itemID + "";
+        else {
+          if (scope.ngCheckedList.indexOf(itemID + "") > -1) {
+            if (scope.ngCheckedList.length > 2) {
+              var prestring = scope.ngCheckedList.substring(0, scope.ngCheckedList.indexOf(itemID + "") - 1);
+              if (scope.ngCheckedList.length > scope.ngCheckedList.indexOf(itemID + "") + 1)
+                scope.ngCheckedList = prestring + scope.ngCheckedList.substring(scope.ngCheckedList.indexOf(itemID + "") + 2);
+              else
+                scope.ngCheckedList = prestring;
+            }
+            else {
+              scope.ngCheckedList = scope.ngCheckedList.substring(scope.ngCheckedList.indexOf(itemID + "") + 1);
+            }
+          }
+          else {
+            if (scope.ngCheckedList.length > 0)
+              scope.ngCheckedList = scope.ngCheckedList + "," + itemID;
+            else
+              scope.ngCheckedList = itemID + "";
+          }
+        }
+      };
+    }
+  }
+});
+
+angular.module('app').directive('ngWishlist', function () {
+  return {
+    restrict: 'A',
+    replace: false,
+    scope: {
+      ngWishlistItems: '=',
+      ngItems: '=',
+      ngCheckedList: '@checkedList'
+    },
+    template: '<tr ng-repeat="wlitem in ngWishlistItems">' +
+                '<td class="grid-checkbox"><input type="checkbox" ng-model="wlitem.selected" ng-click="tick(wlitem.ItemID)" /></td>' +
+                '<td class="grid-image"><a href="/item/{{wlitem.ItemID}}"><img src="/Content/images/{{wlitem.ItemID}}.jpg" /></a></td>' +
+                '<td class="grid-name"><a href="/item/{wlitem.ItemID}}">{{getItem(wlitem.ItemID, ngItems).ItemName}}</a></td>' +
+                '<td class="grid-price">R {{getItem(wlitem.ItemID, ngItems).Price}}</td>' +
+              '</tr>',
+    link: function (scope, iElement, iAttrs) {
+      scope.getItem = function (itemID, items) {
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].ItemID == itemID)
+            return items[i];
+        }
+      };
+
+      scope.tick = function (itemID) {
+        if (typeof scope.ngCheckedList === 'undefined')
+          scope.ngCheckedList = itemID + "";
+        else {
+          if (scope.ngCheckedList.indexOf(itemID + "") > -1) {
+            if (scope.ngCheckedList.length > 2) {
+              var prestring = scope.ngCheckedList.substring(0, scope.ngCheckedList.indexOf(itemID + "") - 1);
+              if (scope.ngCheckedList.length > scope.ngCheckedList.indexOf(itemID + "") + 1)
+                scope.ngCheckedList = prestring + scope.ngCheckedList.substring(scope.ngCheckedList.indexOf(itemID + "") + 2);
+              else
+                scope.ngCheckedList = prestring;
+            }
+            else {
+              scope.ngCheckedList = scope.ngCheckedList.substring(scope.ngCheckedList.indexOf(itemID + "") + 1);
+            }
+          }
+          else {
+            if (scope.ngCheckedList.length > 0)
+              scope.ngCheckedList = scope.ngCheckedList + "," + itemID;
+            else
+              scope.ngCheckedList = itemID + "";
+          }
+        }
+      };
     }
   }
 });
@@ -93,14 +170,17 @@ angular.module('app').directive('ngCartitemHeaders', function () {
   return {
     restrict: 'A',
     replace: false,
+    scope: {
+      ngIswl: '='
+    },
     template: '<tr>' +
-                '<th class="grid-number">#</th>' +
+                '<th class="grid-number" ng-hide="ngIswl">#</th>' +
                 '<th class="grid-checkbox"></th>' +
                 '<th class="grid-image"></th>' +
                 '<th class="grid-name">Name</th>' +
                 '<th class="grid-price">Price</th>' +
-                '<th class="grid-quantity">Quantity</th>' +
-                '<th class="grid-price">Total</th>' +
+                '<th class="grid-quantity" ng-hide="ngIswl">Quantity</th>' +
+                '<th class="grid-price" ng-hide="ngIswl">Total</th>' +
               '</tr>'
   }
 });

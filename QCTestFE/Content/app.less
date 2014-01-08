@@ -5,6 +5,8 @@
 @import "header.css";
 @import "shopping.css";
 
+@background-color: white;
+
 body{
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #003545;
@@ -12,6 +14,13 @@ body{
 a {
   text-decoration: none;
 }
+
+.containter {
+  display: block;
+  background-color: @background-color;
+  padding: 25px;
+}
+
 .form-box {
     margin-top: 20px;
     padding: 40px 20px 20px;
@@ -24,18 +33,17 @@ a {
 #ui-view {
   position: absolute;
   margin-left: 250px;
-  background: white;
+  background: @background-color;
   width: 100%;
   min-height: 120%;
 }
 
 .app-content {
   position: absolute;
-  background: white;
+  background: @background-color;
   width: 100%;
   height: 100%;
   min-height: 100%;
-  margin: 25px;
   padding: 5px;
 
   > div {
@@ -53,7 +61,6 @@ form {
   margin: 20px 20px 20px 20px;
   border: 1px solid transparent;
   border-radius: 4px;
-  line-height: 10px;
 }
 
 .message-class-true {  

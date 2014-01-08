@@ -1,9 +1,19 @@
-﻿<div class="container app-content">
-  <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
-  <h3>{{wishlist.WishlistName}}</h3>
-  <ul>
-    <li ng-repeat="wlItem in wishlist.WishlistItems">
-      <itemline item="getItem(wlItem.ItemID)" isWL="true"></itemline>
-    </li>
-  </ul>
+﻿<div class="app-content">
+  <div>
+    <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
+  </div>
+  <div class="container">
+    <h3>{{wishlist.WishlistName}}</h3>
+    <div class="container orders">
+      <table>
+        <tbody>
+          <tr ng-cartitem-headers ng-iswl="true"></tr>
+          <tr ng-wishlist ng-wishlist-items="wishlist.WishlistItems" ng-items="items" ng-checked-list="checkedList"></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container">
+      <button type="button" class="btn buy-button" ng-click="addToCart()">Add To Cart</button>
+    </div>
+  </div>
 </div>
