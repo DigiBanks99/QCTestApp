@@ -9,7 +9,6 @@
           <img src="/Content/images/{{item.ItemID}}.jpg" />
           <h3><span>{{item.ItemName}}</span></h3>
           <p><span>{{item.ShortDescription}}</span></p>
-          <div ng-bind-html-unsafe="ToTrusted(item.Description, sce)"></div>
           <p><span>R {{item.Price}}</span></p>
         </div>
       </a>

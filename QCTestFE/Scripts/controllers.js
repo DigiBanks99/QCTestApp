@@ -4,27 +4,61 @@ function AccordionCntrl($scope) {
   $scope.expandAccordion = ExpandAccordion();
 }
 
-function HomeCtrl($scope, $http) {
+function HomeCtrl($scope, $http, $rootScope) {
   apiController = 'api/items';
 
   $scope.message = "";
   $scope.success = true;
   $scope.messageClass = "message-class-" + $scope.success;
 
-  $http.get(apiController).then(function (response) {
-    $scope.itemList = response.data.ObjectList;
+  if (typeof $rootScope.itemList === 'undefined' || $rootScope.itemList.length == 0) {
+    $http.get(apiController).then(function (response) {
+      $scope.itemList = response.data.ObjectList;
+      $rootScope.itemList = $scope.itemList;
 
-    $scope.message = response.data.Message;
-    $scope.success = response.data.Success;
-    $scope.messageClass = "message-class-" + $scope.success;
+      $scope.message = response.data.Message;
+      $scope.success = response.data.Success;
+      $scope.messageClass = "message-class-" + $scope.success;
 
+      $scope.outdrList = new Array();
+      $scope.electList = new Array();
+      $scope.furnList = new Array();
+
+      for (var i = 0; i < $scope.itemList.length; i++) {
+        switch ($scope.itemList[i].CategoryID) {
+          case 1:
+          case 2:
+          case 3:
+          case 4:
+            $scope.furnList[$scope.furnList.length] = $scope.itemList[i];
+            break;
+          case 5:
+          case 6:
+          case 7:
+          case 8:
+            $scope.electList[$scope.electList.length] = $scope.itemList[i];
+            break;
+          case 9:
+          case 10:
+          case 11:
+          case 12:
+            $scope.outdrList[$scope.outdrList.length] = $scope.itemList[i];
+            break;
+          default:
+            break;
+        }
+      }
+    });
+  }
+  else
+  {
+    $scope.itemList = $rootScope.itemList;
     $scope.outdrList = new Array();
     $scope.electList = new Array();
     $scope.furnList = new Array();
 
     for (var i = 0; i < $scope.itemList.length; i++) {
-      switch($scope.itemList[i].CategoryID)
-      {
+      switch ($scope.itemList[i].CategoryID) {
         case 1:
         case 2:
         case 3:
@@ -47,7 +81,7 @@ function HomeCtrl($scope, $http) {
           break;
       }
     }
-  });
+  }
 }
 
 function ItemCtrl($scope, $http, $routeParams, $sce) {
@@ -122,7 +156,7 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
   };
 }
 
-function WishlistCtrl($scope, $http, $routeParams) {
+function WishlistCtrl($scope, $http, $routeParams, $rootScope) {
   var apiController = '/api/wishlist/' + $routeParams.id;
 
   $scope.message = "";
@@ -136,12 +170,19 @@ function WishlistCtrl($scope, $http, $routeParams) {
     $scope.messageClass = "message-class-" + $scope.success;
   });
 
-  $http.get('/api/items').then(function (response) {
-    $scope.items = response.data.ObjectList;
-    $scope.message = response.data.Message;
-    $scope.success = response.data.Success;
-    $scope.messageClass = "message-class-" + $scope.success;
-  });
+  if (typeof $rootScope.itemList === 'undefined' || $rootScope.itemList.length == 0) {
+    $http.get('/api/items').then(function (response) {
+      $scope.items = response.data.ObjectList;
+      $rootScope.itemList = $scope.items;
+      $scope.message = response.data.Message;
+      $scope.success = response.data.Success;
+      $scope.messageClass = "message-class-" + $scope.success;
+    });
+  }
+  else
+  {
+    $scope.items = $rootScope.itemList;
+  }
 
   $scope.getItem = function (itemID) {
     for (var i = 0; i < $scope.items.length; i++) {
@@ -151,7 +192,7 @@ function WishlistCtrl($scope, $http, $routeParams) {
   };
 }
 
-function WishlistListCtrl($scope, $http, $routeParams) {
+function WishlistListCtrl($scope, $http, $routeParams, $rootScope) {
   var apiController = '/api/wishlist';
 
   $scope.message = "";
@@ -167,12 +208,18 @@ function WishlistListCtrl($scope, $http, $routeParams) {
     $scope.messageClass = "message-class-" + $scope.success;
   });
 
-  $http.get('/api/category').then(function (response) {
-    $scope.categories = response.data.ObjectList;
-    $scope.message = response.data.Message;
-    $scope.success = response.data.Success;
-    $scope.messageClass = "message-class-" + $scope.success;
-  });
+  if (typeof $rootScope.categories === 'undefined' || $rootScope.categories.length == 0) {
+    $http.get('/api/category').then(function (response) {
+      $scope.categories = response.data.ObjectList;
+      $rootScope.categories = $scope.categories;
+      $scope.message = response.data.Message;
+      $scope.success = response.data.Success;
+      $scope.messageClass = "message-class-" + $scope.success;
+    });
+  }
+  else {
+    $scope.categories = $rootScope.categories;
+  }
 
   $scope.getCategoryNameByID = function (categoryID) {
     for (var i = 0; i < $scope.categories.length; i++) {
@@ -209,7 +256,71 @@ function WishlistListCtrl($scope, $http, $routeParams) {
   };
 }
 
-function CartCtrl($scope, $http) {
+function WishlistListCtrl($scope, $http, $routeParams, $rootScope) {
+  var apiController = '/api/wishlist';
+
+  $scope.message = "";
+  $scope.success = true;
+  $scope.messageClass = "message-class-" + $scope.success;
+
+  $scope.category = new Object();
+
+  $http.get(apiController).then(function (response) {
+    $scope.wishlistList = response.data.ObjectList;
+    $scope.message = response.data.Message;
+    $scope.success = response.data.Success;
+    $scope.messageClass = "message-class-" + $scope.success;
+  });
+
+  if (typeof $rootScope.categories === 'undefined' || $rootScope.categories.length == 0) {
+    $http.get('/api/category').then(function (response) {
+      $scope.categories = response.data.ObjectList;
+      $rootScope.categories = $scope.categories;
+      $scope.message = response.data.Message;
+      $scope.success = response.data.Success;
+      $scope.messageClass = "message-class-" + $scope.success;
+    });
+  }
+  else {
+    $scope.categories = $rootScope.categories;
+  }
+
+  $scope.getCategoryNameByID = function (categoryID) {
+    for (var i = 0; i < $scope.categories.length; i++) {
+      if ($scope.categories[i].CategoryID == categoryID)
+        return $scope.categories[i].CategoryName;
+    }
+    return "Uncategorised";
+  };
+
+  $scope.setCategory = function (cat) {
+    $scope.category = cat;
+    $(".listbox-category li").click(function () {
+      $(".listbox-category li").not(this).each(function () {
+        $(this).css("background-color", "white");
+        $(this).css("color", "black");
+      });
+      $(this).css("background-color", "#1661AD");
+      $(this).css("color", "white");
+    });
+  };
+
+  $scope.createWishlist = function () {
+    var info = new Object();
+    info.WishlistName = $scope.wlname;
+    if ($scope.category != null)
+      info.CategoryID = $scope.category.CategoryID;
+    else
+      info.CategoryID = null;
+    $http.post('/api/wishlist', info).then(function (response) {
+      $scope.message = response.data.Message;
+      $scope.success = response.data.Success;
+      $scope.messageClass = "message-class-" + $scope.success;
+    });
+  };
+}
+
+function CartCtrl($scope, $http, $rootScope) {
   apiController = '/api/order';
 
   $scope.message = "";
@@ -225,12 +336,18 @@ function CartCtrl($scope, $http) {
       $scope.total = $scope.total + $scope.orders[i].Total;
   });
 
-  $http.get('/api/items').then(function (response) {
-    $scope.items = response.data.ObjectList;
-    $scope.message = response.data.Message;
-    $scope.success = response.data.Success;
-    $scope.messageClass = "message-class-" + $scope.success;
-  });
+  if (typeof $rootScope.itemList === 'undefined' || $rootScope.itemList.length == 0) {
+    $http.get('/api/items').then(function (response) {
+      $scope.items = response.data.ObjectList;
+      $rootScope.itemList = $scope.items;
+      $scope.message = response.data.Message;
+      $scope.success = response.data.Success;
+      $scope.messageClass = "message-class-" + $scope.success;
+    });
+  }
+  else {
+    $scope.items = $rootScope.itemList;
+  }
 
   $scope.getItem = function (itemID) {
     return GetItem(itemID, $scope.items);
@@ -257,17 +374,50 @@ function CartCtrl($scope, $http) {
   };
 }
 
-function ItemCategoryCtrl($scope, $http, $routeParams) {
+function ItemCategoryCtrl($scope, $http, $routeParams, $rootScope) {
   $scope.message = "";
   $scope.success = true;
   $scope.messageClass = "message-class-" + $scope.success;
+  $scope.itemList = new Array();
 
-  $http.get('/api/items/' + $routeParams.cat).then(function (response) {
-    $http.itemList = response.data.ObjectList;
-    $scope.message = response.data.Message;
-    $scope.success = response.data.Success;
-    $scope.messageClass = "message-class-" + $scope.success;
-  })
+  if (typeof $rootScope.categories === 'undefined' || $rootScope.categories.length == 0) {
+    $http.get('/api/category').then(function (response) {
+      $scope.categories = response.data.ObjectList;
+      $scope.message = response.data.Message;
+      $scope.success = response.data.Success;
+      $scope.messageClass = "message-class-" + $scope.success;
+
+      var categoryID = new Object();
+      for (var i = 0; i < $scope.categories.length; i++) {
+        if ($scope.categories[i].CategoryName.toUpperCase() != $routeParams.cat.toUpperCase())
+          continue;
+        categoryID = $scope.categories[i].CategoryID;
+        $scope.categoryName = $scope.categories[i].CategoryName;
+        break;
+      }
+
+      for (var i = 0; i < $rootScope.itemList.length; i++) {
+        if ($rootScope.itemList[i].CategoryID == categoryID)
+          $scope.itemList[$scope.itemList.length] = $rootScope.itemList[i];
+      }
+    });
+  }
+  else {
+    $scope.categories = $rootScope.categories;
+    var categoryID = new Object();
+    for (var i = 0; i < $scope.categories.length; i++) {
+      if ($scope.categories[i].CategoryName.toUpperCase() != $routeParams.cat.toUpperCase())
+        continue;
+      categoryID = $scope.categories[i].CategoryID;
+      $scope.categoryName = $scope.categories[i].CategoryName;
+      break;
+    }
+
+    for (var i = 0; i < $rootScope.itemList.length; i++) {
+      if ($rootScope.itemList[i].CategoryID == categoryID)
+        $scope.itemList[$scope.itemList.length] = $rootScope.itemList[i];
+    }
+  }
 }
 
 //Utils

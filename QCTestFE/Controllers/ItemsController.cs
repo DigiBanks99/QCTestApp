@@ -66,14 +66,56 @@ namespace QCTestFE.Controllers
       return info;
     }
 
-    [HttpGet]
-    public Info Get(string categoryName)
+    // POST api/<controller>
+    [HttpPost]
+    public Info Post(Item value)
+    {
+      Info info = new Info();
+      try
+      {
+        DataAccess.ReadObjectData(value);
+        value.AddToCart(1);
+      }
+      catch (Exception ex)
+      {
+        info.Message = ex.Message;
+        info.Success = false;
+      }
+      return info;
+    }
+
+    private Info GetItemByInt(int id)
+    {
+      Info info = new Info();
+      try
+      {
+        Item item = Tools.ItemCache.GetItemByKey(id);
+        if (item != null)
+        {
+          info.Object = item;
+          return info;
+        }
+
+        item = new Item();
+        item.ItemID = id;
+        DataAccess.ReadObjectData(item);
+        info.Object = item;
+      }
+      catch (Exception ex)
+      {
+        info.Message = ex.Message;
+        info.Success = false;
+      }
+      return info;
+    }
+
+    private Info GetItembyString(string categoryName)
     {
       Info info = new Info();
       try
       {
         ItemList itemList = new ItemList();
-        
+
         foreach (var item in itemList)
         {
           if (Tools.CategoryCache.GetCategoryByKey(item.CategoryID).CategoryName != categoryName)
@@ -98,34 +140,6 @@ namespace QCTestFE.Controllers
         info.Success = false;
       }
       return info;
-    }
-
-    // POST api/<controller>
-    [HttpPost]
-    public Info Post(Item value)
-    {
-      Info info = new Info();
-      try
-      {
-        DataAccess.ReadObjectData(value);
-        value.AddToCart(1);
-      }
-      catch (Exception ex)
-      {
-        info.Message = ex.Message;
-        info.Success = false;
-      }
-      return info;
-    }
-
-    // PUT api/<controller>/5
-    public void Put(int id, [FromBody]string value)
-    {
-    }
-
-    // DELETE api/<controller>/5
-    public void Delete(int id)
-    {
     }
   }
 }

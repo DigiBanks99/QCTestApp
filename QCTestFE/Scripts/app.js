@@ -36,7 +36,7 @@
           templateUrl: '/Content/app/newwishlist.html',
           controller: WishlistListCtrl
         }
-      ).when('/items/category/:cat',
+      ).when('/items/:cat',
         {
           templateUrl: '/Content/app/items.html',
           controller: ItemCategoryCtrl
