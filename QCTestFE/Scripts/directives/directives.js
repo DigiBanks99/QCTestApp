@@ -49,7 +49,7 @@ angular.module('app').directive('ngItemLine', function () {
       ngIswl: '=',
       ngOrders: '=',
       ngItems: '=',
-      ngCheckedList: '@checkedList'
+      ngCheckedList: '='
     },
     template: '<tr ng-repeat="order in ngOrders">' +
                 '<td class="grid-number">{{order.OrderID}}</td>' + //testline 
@@ -88,28 +88,21 @@ angular.module('app').directive('ngItemLine', function () {
       };
 
       scope.tick = function (itemID) {
-        if (typeof scope.ngCheckedList === 'undefined')
-          scope.ngCheckedList = itemID + "";
-        else {
-          if (scope.ngCheckedList.indexOf(itemID + "") > -1) {
-            if (scope.ngCheckedList.length > 2) {
-              var prestring = scope.ngCheckedList.substring(0, scope.ngCheckedList.indexOf(itemID + "") - 1);
-              if (scope.ngCheckedList.length > scope.ngCheckedList.indexOf(itemID + "") + 1)
-                scope.ngCheckedList = prestring + scope.ngCheckedList.substring(scope.ngCheckedList.indexOf(itemID + "") + 2);
-              else
-                scope.ngCheckedList = prestring;
-            }
-            else {
-              scope.ngCheckedList = scope.ngCheckedList.substring(scope.ngCheckedList.indexOf(itemID + "") + 1);
-            }
+        var list = new Array();
+        var deleted = false;
+        for (var i = 0; i < scope.ngCheckedList.length; i++) {
+          if (scope.ngCheckedList[i] == itemID) {
+            scope.ngCheckedList[i] = null;
+            deleted = true;
+            continue;
           }
-          else {
-            if (scope.ngCheckedList.length > 0)
-              scope.ngCheckedList = scope.ngCheckedList + "," + itemID;
-            else
-              scope.ngCheckedList = itemID + "";
-          }
+          list[list.length] = scope.ngCheckedList[i];
         }
+        if (deleted) {
+          scope.ngCheckedList = list;
+          return;
+        }
+        scope.ngCheckedList[scope.ngCheckedList.length] = itemID;
       };
     }
   }
@@ -122,16 +115,15 @@ angular.module('app').directive('ngWishlist', function () {
     scope: {
       ngWishlistItems: '=',
       ngItems: '=',
-      ngCheckedList: '@checkedList'
+      ngCheckedList: '=ngCheckedList'
     },
     template: '<tr ng-repeat="wlitem in ngWishlistItems">' +
                 '<td class="grid-checkbox"><input type="checkbox" ng-model="wlitem.selected" ng-click="tick(wlitem.ItemID)" /></td>' +
                 '<td class="grid-image"><a href="/item/{{wlitem.ItemID}}"><img src="/Content/images/{{wlitem.ItemID}}.jpg" /></a></td>' +
-                '<td class="grid-name"><a href="/item/{wlitem.ItemID}}">{{getItem(wlitem.ItemID, ngItems).ItemName}}</a></td>' +
+                '<td class="grid-name"><a href="/item/{wlitem.ItemID}}">{{getItem(wlitem.ItemID, ngItems).ItemName}} -- {{ngCheckedList}}</a></td>' +
                 '<td class="grid-price">R {{getItem(wlitem.ItemID, ngItems).Price}}</td>' +
               '</tr>',
     link: function (scope, iElement, iAttrs) {
-      scope.ngCheckedList = iAttrs.ngCheckedList;
       scope.getItem = function (itemID, items) {
         for (var i = 0; i < items.length; i++) {
           if (items[i].ItemID == itemID)
@@ -140,31 +132,22 @@ angular.module('app').directive('ngWishlist', function () {
       };
 
       scope.tick = function (itemID) {
-        if (typeof scope.ngCheckedList === 'undefined')
-          scope.ngCheckedList = itemID + "";
-        else {
-          if (scope.ngCheckedList.indexOf(itemID + "") > -1) {
-            if (scope.ngCheckedList.length > 2) {
-              var prestring = scope.ngCheckedList.substring(0, scope.ngCheckedList.indexOf(itemID + "") - 1);
-              if (scope.ngCheckedList.length > scope.ngCheckedList.indexOf(itemID + "") + 1)
-                scope.ngCheckedList = prestring + scope.ngCheckedList.substring(scope.ngCheckedList.indexOf(itemID + "") + 2);
-              else
-                scope.ngCheckedList = prestring;
-            }
-            else {
-              scope.ngCheckedList = scope.ngCheckedList.substring(scope.ngCheckedList.indexOf(itemID + "") + 1);
-            }
+        var list = new Array();
+        var deleted = false;
+        for (var i = 0; i < scope.ngCheckedList.length; i++) {
+          if (scope.ngCheckedList[i] == itemID) {
+            scope.ngCheckedList[i] = null;
+            deleted = true;
+            continue;
           }
-          else {
-            if (scope.ngCheckedList.length > 0)
-              scope.ngCheckedList = scope.ngCheckedList + "," + itemID;
-            else
-              scope.ngCheckedList = itemID + "";
-          }
+          list[list.length] = scope.ngCheckedList[i];
         }
+        if (deleted) {
+          scope.ngCheckedList = list;
+          return;
+        }
+        scope.ngCheckedList[scope.ngCheckedList.length] = itemID;
       };
-
-      scope.$apply();
     }
   }
 });
@@ -214,7 +197,7 @@ angular.module('app').directive('ngCategoryListSelector', function () {
     template: '<ul id="cat-list">' +
                 '<li ng-repeat="cat in ngCategories" ng-click="setCategory(cat)">AS {{cat.CategoryName}}</li>' +
               '</ul>',
-    link: function (scope, iElements, iAttrs) {
+    link: function (scope, iElement, iAttrs) {
       scope.setCategory = function (cat) {
         ngCategory = cat;
       };

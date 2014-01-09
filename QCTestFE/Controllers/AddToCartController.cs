@@ -12,26 +12,30 @@ using QCTestApp.DataAccess;
 
 namespace QCTestFE.Controllers
 {
-    public class AddToCartController : ApiController
+  public class AddtocartController : ApiController
+  {
+    [HttpPost]
+    public Info Post(object[] paramters)
     {
-      [HttpPost]
-      public Info Post(string paramters)
+      Info info = new Info();
+      try
       {
-        Info info = new Info();
-        try 
-        {
-          ItemList items = new ItemList();
-          string qry = string.Format("SELECT * FROM [Shopping].[Item] WHERE [ItemID] IN ({0})", paramters);
-          DataAccess.ReadObjectData(items, qry);
-          foreach (var item in items)
-            item.AddToCart();
-        }
-        catch (Exception ex)
-        {
-          info.Message = ex.Message;
-          info.Success = false;
-        }
-        return info;
+        string ids = "";
+        for (int i = 0; i < paramters.Length; i++)
+          ids += string.Format("{0}{1}", ids.Length > 0 ? "," : string.Empty, Convert.ToString(paramters[i]));
+
+        ItemList items = new ItemList();
+        string qry = string.Format("SELECT * FROM [Shopping].[Item] WHERE [ItemID] IN ({0})", ids);
+        DataAccess.ReadObjectData(items, qry);
+        foreach (var item in items)
+          item.AddToCart();
       }
+      catch (Exception ex)
+      {
+        info.Message = ex.Message;
+        info.Success = false;
+      }
+      return info;
     }
+  }
 }

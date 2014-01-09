@@ -166,7 +166,7 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
 
 function WishlistCtrl($scope, $http, $routeParams, $rootScope) {
   var apiController = '/api/wishlist/' + $routeParams.id;
-  $scope.checkedList = "";
+  $scope.checkedList = new Array();
 
   $scope.message = "";
   $scope.success = true;
@@ -194,7 +194,7 @@ function WishlistCtrl($scope, $http, $routeParams, $rootScope) {
   }
 
   $scope.addToCart = function () {
-    var info= $scope.checkedList;
+    var info = $scope.checkedList;
     if (info != null)
     {
       $http.post('/api/addtocart', info).then(function (response) {
@@ -276,7 +276,7 @@ function WishlistListCtrl($scope, $http, $routeParams, $rootScope) {
 
 function CartCtrl($scope, $http, $rootScope) {
   apiController = '/api/order';
-  $scope.checkedList = "";
+  $scope.checkedList = new Array();
 
   $scope.message = "";
   $scope.success = true;
@@ -396,8 +396,4 @@ function GetItem(itemID, itemList) {
     if (itemList[i].ItemID == itemID)
       return itemList[i];
   }
-}
-
-function GetMessageClass() {
-  return $scope.message + $scope.success;
 }
