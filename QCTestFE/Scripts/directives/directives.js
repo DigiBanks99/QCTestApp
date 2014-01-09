@@ -127,7 +127,7 @@ angular.module('app').directive('ngWishlist', function () {
     template: '<tr ng-repeat="wlitem in ngWishlistItems">' +
                 '<td class="grid-checkbox"><input type="checkbox" ng-model="wlitem.selected" ng-click="tick(wlitem.ItemID)" /></td>' +
                 '<td class="grid-image"><a href="/item/{{wlitem.ItemID}}"><img src="/Content/images/{{wlitem.ItemID}}.jpg" /></a></td>' +
-                '<td class="grid-name"><a href="/item/{wlitem.ItemID}}">{{getItem(wlitem.ItemID, ngItems).ItemName}} -- {{ngCheckedList}}</a></td>' +
+                '<td class="grid-name"><a href="/item/{wlitem.ItemID}}">{{getItem(wlitem.ItemID, ngItems).ItemName}}</a></td>' +
                 '<td class="grid-price">R {{getItem(wlitem.ItemID, ngItems).Price}}</td>' +
               '</tr>',
     link: function (scope, iElement, iAttrs) {
