@@ -170,6 +170,9 @@ namespace QCTestApp.Objects.Shopping
     #region Public Methods
     public decimal CalcTotal()
     {
+      int extra = Quantity - 5;
+      if (extra > 0)
+        return PricePerUnit * (Quantity + extra);
       return PricePerUnit * Quantity;
     }
     #endregion //Public Methods
