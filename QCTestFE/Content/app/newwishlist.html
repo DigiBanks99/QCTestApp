@@ -1,13 +1,16 @@
-﻿<div class="app-content">
-  <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
-  <div class="wishlist-new">
+﻿<div class="app-content container">
+  <div class="container">
+    <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
+  </div>
+  <div class="wishlist-new container">
     <span>Name: <input type="text" ng-model="wlname" /></span>
-    <span>
+    <div>
       Category:
       <ul class="listbox">
+        <li>Uncategorised</li>
         <li ng-repeat="cat in categories" ng-click="setCategory(cat)">{{cat.CategoryName}}</li>
       </ul>
-    </span>
+    </div>
     <button type="button" class="btn buy-button" ng-click="createWishlist()">Create Wishlist</button>
   </div>
 </div>

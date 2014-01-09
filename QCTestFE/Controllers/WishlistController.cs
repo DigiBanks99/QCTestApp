@@ -62,7 +62,8 @@ namespace QCTestFE.Controllers
           wl.Code = Tools.GenCode(Tools.ActiveUser.UserName);
           wl.UserID = Tools.ActiveUser.UserID;
           wl.DateCreated = DateTime.Now;
-          wl.Save();
+          if (obj.CategoryID != null)
+            wl.Save();
         }
         catch (Exception ex)
         {
@@ -77,6 +78,6 @@ namespace QCTestFE.Controllers
   public class WishlistInfo : Info
   {
     public string WishlistName { get; set; }
-    public int CategoryID { get; set; }
+    public int? CategoryID { get; set; }
   }
 }

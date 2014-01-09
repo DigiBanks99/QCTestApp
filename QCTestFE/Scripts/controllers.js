@@ -270,6 +270,11 @@ function WishlistListCtrl($scope, $http, $routeParams, $rootScope) {
       $scope.message = response.data.Message;
       $scope.success = response.data.Success;
       $scope.messageClass = "message-class-" + $scope.success;
+      if ($scope.success == true) {
+        $scope.message = "Your wishlist '" + $scope.wlname + "', has been succesfully created and saved to the database.";
+        $scope.success = false;
+        $scope.checkedList = new Array();
+      }
     });
   };
 }
