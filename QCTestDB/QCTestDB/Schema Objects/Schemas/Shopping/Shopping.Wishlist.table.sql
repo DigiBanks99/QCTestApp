@@ -2,7 +2,7 @@
 (
   [WishlistID]    INT           NOT NULL IDENTITY (1, 1),
   [UserID]        INT           NOT NULL,  
-  [Code]          VARCHAR (10)  NOT NULL,
+  [Code]          VARCHAR (16)  NOT NULL,
   [DateCreated]   SMALLDATETIME NOT NULL, 
   [WishlistName]  VARCHAR (30)  NOT NULL, 
   [CategoryID]    INT           NULL, 

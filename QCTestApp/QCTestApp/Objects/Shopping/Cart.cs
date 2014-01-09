@@ -18,8 +18,10 @@ namespace QCTestApp.Objects.Shopping
     public const string COL_STATUS = "Status";
 
     public const string CHILD_CARTORDERITEMS = "CartOrderItems";
+    public const string CHILD_ORDERITEMS = "OrderItems";
 
     private bool _cartOrderItemsLoaded;
+    private bool _orderItemsLoaded;
 
     public Cart() { }
 
@@ -32,7 +34,9 @@ namespace QCTestApp.Objects.Shopping
       Code = Tools.GenCode(Tools.ActiveUser.Code);
       DateCreated = DateTime.Now;
       CartOrderItems = new CartOrderRelList();
+      OrderItems = new OrderList();
       _cartOrderItemsLoaded = false;
+      _orderItemsLoaded = false;
     }
 
     public override string GetObjectName()
@@ -89,6 +93,7 @@ namespace QCTestApp.Objects.Shopping
     public override void LoadChildren()
     {
       LoadCartOrderItems();
+      LoadOrderItems();
       base.LoadChildren();
     }
     #endregion //Overrides
@@ -149,6 +154,13 @@ namespace QCTestApp.Objects.Shopping
       get { return _cartOrderItems; }
       set { SetProperty<CartOrderRelList>(CHILD_CARTORDERITEMS, ref _cartOrderItems, value); }
     }
+
+    private OrderList _orderItems;
+    public OrderList OrderItems
+    {
+      get { return _orderItems; }
+      set { SetProperty<OrderList>(CHILD_ORDERITEMS, ref _orderItems, value); }
+    }
     #endregion //Properties
 
     #region Data Access
@@ -170,57 +182,53 @@ namespace QCTestApp.Objects.Shopping
       return _cartOrderItems;
     }
 
-    public void Checkout()
+    public OrderList GetOrderItems()
     {
-      string qry = string.Empty;
-      foreach (var cartOrder in CartOrderItems)
-        qry += string.Format("{0}{1}", qry.Length < 1 ? string.Empty : ",", cartOrder.OrderID);
-      OrderList orderList = new OrderList();
-      DataAccess.DataAccess.ReadObjectData(orderList, qry);
-      foreach (var order in orderList)
+      return _orderItems;
+    }
+
+    public void Checkout(int[] ids = null)
+    {
+      if (ids == null)
+        SetStatus(Constants.STATUS_ORDERED);
+      else
+        SetStatus(Constants.STATUS_ORDERED, ids);
+      bool cleared = true;
+      foreach (var order in OrderItems)
       {
-        order.OrderDate = DateTime.Now;
-        order.Status = Constants.STATUS_ORDERED;
+        if (order.DispatchDate == null)
+        {
+          cleared = false;
+          break;
+        }
       }
-      orderList.Save();
+      if (!cleared)
+        return;
+
+      Tools.ActiveUser.PendingCart = Tools.ActiveUser.ActiveCart;
+      Tools.ActiveUser.PendingCart.Status = Constants.STATUS_ORDERED;
+      Tools.ActiveUser.PendingCart.Save();
+      Tools.ActiveUser.ActiveCart = new Cart();
+      Tools.ActiveUser.ActiveCart.UserID = Tools.ActiveUser.UserID;
+      Tools.ActiveUser.ActiveCart.Save();
+      Tools.ActiveUser.Save();
     }
 
     public void Dispatch()
     {
-      string qry = string.Empty;
-      foreach (var cartOrder in CartOrderItems)
-        qry += string.Format("{0}{1}", qry.Length < 1 ? string.Empty : ",", cartOrder.OrderID);
-      OrderList orderList = new OrderList();
-      DataAccess.DataAccess.ReadObjectData(orderList, qry);
-      foreach (var order in orderList)
-      {
-        order.DispatchDate = DateTime.Now;
-        order.Status = Constants.STATUS_DISPATCHED;
-      }
-      orderList.Save();
+      SetStatus(Constants.STATUS_DISPATCHED);
+      Tools.ActiveUser.PendingCart.Status = Constants.STATUS_DISPATCHED;
+      Tools.ActiveUser.PendingCart.Save();
+      Tools.ActiveUser.Save();
     }
 
     public void CompleteTransaction()
     {
-      string qry = string.Empty;
-      foreach (var cartOrder in CartOrderItems)
-        qry += string.Format("{0}{1}", qry.Length < 1 ? string.Empty : ",", cartOrder.OrderID);
-      OrderList orderList = new OrderList();
-      DataAccess.DataAccess.ReadObjectData(orderList, qry);
-      foreach (var order in orderList)
-      {
-        order.CompletionDate = DateTime.Now;
-        order.Status = Constants.STATUS_CLOSED;
-      }
-      orderList.Save();
-    }
-
-    public void ReceivePayment()
-    {
-      Dispatch();
-      Tools.ActiveUser.PendingCart = Tools.ActiveUser.ActiveCart;
-      Tools.ActiveUser.PendingCart.Status = Constants.STATUS_ORDERED;
-      Tools.ActiveUser.ActiveCart = new Cart();
+      SetStatus(Constants.STATUS_CLOSED);
+      Tools.ActiveUser.PendingCart.Status = Constants.STATUS_DISPATCHED;
+      Tools.ActiveUser.PendingCart.Save();
+      Tools.ActiveUser.PendingCart = null;
+      Tools.ActiveUser.Save();
     }
 
     public void LoadCartOrderItems()
@@ -233,7 +241,49 @@ namespace QCTestApp.Objects.Shopping
 
       _cartOrderItemsLoaded = true;
     }
+
+    public void LoadOrderItems()
+    {
+      if (_orderItemsLoaded)
+        return;
+
+      string qry = string.Empty;
+      foreach (var cartOrder in CartOrderItems)
+        qry += string.Format("{0}{1}", qry.Length < 1 ? string.Empty : ",", cartOrder.OrderID);
+
+      if (qry.Length > 0)
+      {
+        qry = string.Format("SELECT * FROM [Shopping].[Order] WHERE [OrderID] IN ({0})", qry);
+        DataAccess.DataAccess.ReadObjectData(this.OrderItems, qry);
+      }
+
+      _orderItemsLoaded = true;
+    }
     #endregion //Public Methods
+
+    #region Private Methods
+    public void SetStatus(char status)
+    {
+      foreach (var order in OrderItems)
+      {
+        order.DispatchDate = DateTime.Now;
+        order.Status = status;
+      }
+      OrderItems.Save();
+    }
+
+    private void SetStatus(char status, int[] ids)
+    {
+      foreach (var order in OrderItems)
+      {
+        if (!ids.Contains(order.OrderID))
+          continue;
+        order.DispatchDate = DateTime.Now;
+        order.Status = status;
+      }
+      OrderItems.Save();
+    }
+    #endregion //Private Methods
 
     #region Events
     public override void OnPropertyChangedEvent(object sender, FrameWork.QCEventArguments.PropertyChangedEventArgs e)
@@ -250,6 +300,7 @@ namespace QCTestApp.Objects.Shopping
       else if (e.PropertyName == COL_CARTID)
       {
         LoadCartOrderItems();
+        LoadOrderItems();
       }
       base.OnPropertyChangedEvent(sender, e);
     }

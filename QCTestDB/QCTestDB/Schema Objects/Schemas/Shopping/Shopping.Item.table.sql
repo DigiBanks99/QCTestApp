@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [Shopping].[Item]
 (
   [ItemID]            INT             NOT NULL  IDENTITY (1, 1),
-  [Code]              VARCHAR (10)    NOT NULL,
+  [Code]              VARCHAR (16)    NOT NULL,
   [ItemName]          VARCHAR (50)    NOT NULL,
   [ShortDescription]  VARCHAR (100)   NOT NULL,
   [Description]       VARCHAR (MAX)   NOT NULL,

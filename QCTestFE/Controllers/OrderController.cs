@@ -3,6 +3,7 @@ using QCTestApp.FrameWork;
 using QCTestApp.Objects.Shopping;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -19,10 +20,35 @@ namespace QCTestFE.Controllers
         Info info = new Info();
         try
         {
+          if (Tools.ActiveUser != null && Tools.ActiveUser.ActiveCart != null)
+          {
+            info.ObjectList = Tools.ActiveUser.ActiveCart.OrderItems;
+            return info;
+          }
+
+          if (Tools.ActiveUser.ActiveCart != null)
+          {
+            info.Message = "DEV Error: CS - The Active Cart has not been set.";
+            info.Success = false;
+            return info;
+          }
+
+          CartOrderRelList orderRels = new CartOrderRelList();
+          string qry = "SELECT * FROM [Shopping].[CartOrderRel] WHERE [CartID] = " + Tools.ActiveUser.ActiveCart.CartID;
+          DataAccess.ReadObjectData(orderRels, qry);
+
+          foreach (var orderRel in orderRels)
+            qry += string.Format("{0}{1}", qry.Length > 0 ? "," : string.Empty, orderRel.OrderID);
+
           OrderList orders = new OrderList();
-          string qry = "SELECT * FROM [Shopping].[Order]";
+          qry = string.Format("SELECT * FROM [Shopping].[Order] IN ({0})", qry);
           DataAccess.ReadObjectData(orders, qry);
           info.ObjectList = orders;
+        }
+        catch (SqlException ex)
+        {
+          info.Message = ex.Message;
+          info.Success = false;
         }
         catch (Exception ex)
         {

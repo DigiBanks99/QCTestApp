@@ -2,8 +2,8 @@
 (
   [CartID]        INT             NOT NULL  IDENTITY (1, 1),
   [UserID]        INT             NOT NULL,
-  [Code]          VARCHAR (10)    NOT NULL,
-  [DateCreated]  SMALLDATETIME   NOT NULL,
+  [Code]          VARCHAR (16)    NOT NULL,
+  [DateCreated]   SMALLDATETIME   NOT NULL,
   [CartTotal]     DECIMAL (18, 2) NOT NULL,
   [ItemCount]     INT             NOT NULL,
   [Status]        VARCHAR (1)     NOT NULL  CONSTRAINT [DF_Cart_Status] DEFAULT ('N'),  

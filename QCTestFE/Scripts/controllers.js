@@ -327,6 +327,28 @@ function CartCtrl($scope, $http, $rootScope) {
       }
     });
   };
+
+  $scope.checkout = function () {
+    var request = new Array();
+    if ($scope.checkedList.length == 0) {
+      for (var i = 0; i < $scope.orders.length; i++)
+        request[request.length] = $scope.orders[i].OrderID;
+    }
+    else
+      request = $scope.checkedList;
+
+    $http.post('/api/cart', request).then(function (response) {
+      $scope.orders = response.data.ObjectList;
+      $scope.message = response.data.Message;
+      $scope.success = response.data.Success;
+      $scope.messageClass = "message-class-" + $scope.success;
+      if ($scope.success == true) {
+        $scope.message = "Your order is now being processed.";
+        $scope.success = false;
+        $scope.checkedList = new Array();
+      }
+    });
+  };
 }
 
 function ItemCategoryCtrl($scope, $http, $routeParams, $rootScope) {

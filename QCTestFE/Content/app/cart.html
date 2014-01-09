@@ -1,6 +1,8 @@
 ﻿<div class="app-content">
-  <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
-  <div class="container" style="display: inline; overflow: auto; float: left;">
+  <div class="container">
+    <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
+  </div>
+  <div class="container">
     <div class="orders">
       <h1>Your Active Cart</h1>
       <table>
@@ -12,6 +14,5 @@
       </table>
       <button type="button" class="btn buy-checkout" ng-click="checkout()">Proceed to Checkout</button>
     </div>
-    <div ng-hide="true">{{message}}</div>
   </div>
 </div>

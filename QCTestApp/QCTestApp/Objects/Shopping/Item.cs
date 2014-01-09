@@ -147,7 +147,7 @@ namespace QCTestApp.Objects.Shopping
     public void AddToCart(int quantity = 1)
     {
       var cartOrder = Tools.ActiveUser.ActiveCart.CartOrderItems.AddNew() as CartOrderRel;
-      Order order = new Order();
+      var order = Tools.ActiveUser.ActiveCart.OrderItems.AddNew() as Order;
       order.Quantity = quantity;
       order.PricePerUnit = this.Price;
       order.ItemID = this.ItemID;

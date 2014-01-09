@@ -195,7 +195,7 @@ namespace QCTestApp.Objects.Security
 
     private void LoadCarts()
     {
-      string qry = "SELECT * FROM [Shopping].[Cart] WHERE [UserID] = " + UserID;
+      string qry = string.Format("SELECT * FROM [Shopping].[Cart] WHERE [UserID] = {0} AND ([Status] = '{1}' OR [Status] = '{2}')", UserID, Constants.STATUS_ACTIVE, Constants.STATUS_NEW);
       DataAccess.DataAccess.ReadObjectData(Carts, qry);
     }
 
@@ -235,6 +235,7 @@ namespace QCTestApp.Objects.Security
           if (Tools.ActiveUser == null)
             Tools.ActiveUser = this;
           SetupChildren();
+          Save();
         }
       }
       base.OnPropertyChangedEvent(sender, e);

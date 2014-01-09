@@ -20,5 +20,19 @@ namespace QCTestApp.Objects.Shopping
     {
       return base.GetBaseObjectByKey(key) as CartOrderRel;
     }
+
+    public void ProcessOrders(int[] ids = null)
+    {
+      foreach (CartOrderRel order in this)
+      {
+        if (ids != null)
+        {
+          if (ids.Contains(order.OrderID))
+            order.Process();
+        }
+        else
+          order.Process();
+      }
+    }
   }
 }

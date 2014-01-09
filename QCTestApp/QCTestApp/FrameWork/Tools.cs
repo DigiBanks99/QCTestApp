@@ -27,7 +27,7 @@ namespace QCTestApp.FrameWork
     {
       Random random = new Random();
       int rand = random.Next(0, 999);
-      return string.Format("{0}{1}{2}{3}", str == null || str.Length < 3 ? "" : str.Substring(0, 3), DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, rand.ToString());
+      return string.Format("{0}{1}{2}{3}{4}", str == null || str.Length < 5 ? str : str.Substring(0, 5), DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, rand.ToString());
     }
 
     /// <summary>
@@ -67,6 +67,7 @@ namespace QCTestApp.FrameWork
           return;
 
         user.SetupChildren();
+        user.Save();
       }
     }
 

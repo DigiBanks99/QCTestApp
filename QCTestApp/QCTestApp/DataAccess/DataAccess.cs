@@ -65,6 +65,11 @@ namespace QCTestApp.DataAccess
         CloseConnection(connection);
         listObj.LoadChildren();
       }
+      catch (IndexOutOfRangeException ex)
+      {
+        Console.WriteLine(ex.Message);
+        throw ex;
+      }
       catch (Exception ex)
       {
         Console.WriteLine(ex.Message);
@@ -120,6 +125,11 @@ namespace QCTestApp.DataAccess
         var res = GetScalarRes<int?>(key);
         if (res.HasValue)
           obj.Identity = res.Value;
+      }
+      catch (SqlException ex)
+      {
+        Console.WriteLine(ex.Message);
+        throw ex;
       }
       catch (Exception ex)
       {

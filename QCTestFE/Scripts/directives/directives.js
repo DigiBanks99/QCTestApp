@@ -49,11 +49,11 @@ angular.module('app').directive('ngItemLine', function () {
       ngIswl: '=',
       ngOrders: '=',
       ngItems: '=',
-      ngCheckedList: '='
+      ngCheckedList: '=ngCheckedList'
     },
     template: '<tr ng-repeat="order in ngOrders">' +
                 '<td class="grid-number">{{order.OrderID}}</td>' + //testline 
-                '<td class="grid-checkbox"><input type="checkbox" ng-model="order.selected"  ng-click="tick(order.ItemID)" /></td>' +
+                '<td class="grid-checkbox"><input type="checkbox" ng-model="order.selected"  ng-click="tick(order.OrderID)" /></td>' +
                 '<td class="grid-image"><a href="/item/{{order.ItemID}}"><img src="/Content/images/{{order.ItemID}}.jpg" /></a></td>' +
                 '<td class="grid-name"><a href="/item/{{order.ItemID}}">{{getItem(order.ItemID, ngItems).ItemName}}</a></td>' +
                 '<td class="grid-price">R {{getItem(order.ItemID, ngItems).Price}}</td>' +
@@ -80,6 +80,13 @@ angular.module('app').directive('ngItemLine', function () {
       }
     }],
     link: function (scope, iElement, iAttrs, ctrl) {
+      scope.ngOrders = new Array();
+      for (var i = 0; i < iAttrs.ngOrders.length; i++) {
+        if (iAttrs.ngOrders[i].DispatchDate != null) {
+          scope.ngOrders[scope.ngOrders.length] = iAttrs.ngOrders[i];
+        }
+      }
+
       scope.getItem = function (itemID, items) {
         for (var i = 0; i < items.length; i++) {
           if (items[i].ItemID == itemID)

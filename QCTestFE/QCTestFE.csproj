@@ -599,6 +599,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Tools\Info.cs" />
     <Compile Include="Controllers\AddtocartController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs">
       <SubType>Code</SubType>
