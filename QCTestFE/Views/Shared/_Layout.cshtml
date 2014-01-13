@@ -15,18 +15,12 @@
 
   <header class="navbar" role="banner" ng-if=" !layout ">
     @* The 'layout' property is set inside the app.run(..) method on '$stateChangeSuccess' *@
-    <div class="container">
+    <div class="container qc-nav">
       <div class="navbar-header">
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".spa-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
         <img src="~/Images/brand-logo.png" class="nav-bar-logo" />
         <a href="/" class="navbar-brand">QC Test Shopping App</a>
       </div>
-      <nav class="collapse navbar-collapse spa-navbar-collapse" role="navigation">
+      <div class="navbar-header" role="navigation">
         <ul class="nav navbar-nav">
           <li>
             <a href="/cart"><i class="fa fa-shopping-cart fa-lg"></i>Cart</a>
@@ -48,7 +42,7 @@
             <a href="/login">Sign In</a>
           </li>
         </ul>
-      </nav>
+      </div>
     </div>
   </header>
 
@@ -70,7 +64,7 @@
             <li><a href="/items/computers">Computers</a></li>
             <li><a href="/items/appliances">Appliances</a></li>
             <li><a href="/items/televisions">Televisions</a></li>
-            <li><a href="/items/radios">Audio</a></li>
+            <li><a href="/items/audio">Audio</a></li>
           </ul>
         </li>
         <li>

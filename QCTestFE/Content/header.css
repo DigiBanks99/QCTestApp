@@ -15,11 +15,14 @@
     /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00394b', endColorstr='#002535', GradientType=0);
     /* IE6-9 */
-    position: relative;
+    position: fixed;
     min-height: 90px;
     max-height: 90px;
     border: 1px solid transparent;
     color: white;
+    z-index: 100;
+    width: 100%;
+    top: 0;
 }
 
 .nav-bar-logo {
@@ -78,6 +81,8 @@
     margin-bottom: 0;
     list-style: none;
     color: white;
+    position: relative;
+    float: left;
 }
 
 .nav > li {
@@ -114,6 +119,7 @@
 
 .navbar-nav {
     margin: 0;
+    float: left;
 }
 
 .navbar-nav > li > a {
@@ -150,4 +156,8 @@
 
 .navbar-collapse.in {
     overflow-y: auto;
+}
+
+.navbar-header {
+    float: left;
 }

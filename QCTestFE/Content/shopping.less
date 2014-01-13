@@ -2,7 +2,7 @@
 @empty-padding: @empty-margin;
 
 @standard-margin: 15px 15px 15px 15px;
-@standard-margin-single: 15px; 
+@standard-margin-single: 15px;
 
 @button-radius: 27px;
 @button-shadow: inset 0px 1px 1px 0px;
@@ -18,26 +18,33 @@
 .shopping {
   display: block;
   margin: @standard-margin;
+  float: left;
 
   > h2 > a {
     color: #6820cf;
     margin: @standard-margin;
   }
 
-  > div > a > div > img {
-    height: 90px;
-  }
+  > div {
+    float: left;
+    display: block;
 
-  > div > a > div {
-    color: #6820CF;
-    margin-left: @standard-margin-single;
-
-    > h3 > span {
+    > a > div {
+      color: #6820CF;
       margin-left: @standard-margin-single;
-    }
 
-    > p > span {
-      margin-left: @standard-margin-single;
+      > img {
+        height: 100px;
+        width: 100px;
+      }
+
+      > h3 > span {
+        margin-left: @standard-margin-single;
+      }
+
+      > p > span {
+        margin-left: @standard-margin-single;
+      }
     }
   }
 }
@@ -45,9 +52,99 @@
 .shopping-list {
   color: #6820CF;
   display: block;
+  float: left;
 }
 
 .item-tile {
+  display: block;
+  position: relative;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  padding: 10px 10px 10px 10px;
+  width: 300px;
+  height: 250px;
+  background: #FFF;
+  margin: 20px auto;
+  margin-right: 35px;
+  float: right;
+  text-align: left;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+
+  > h3 {
+    color: #BB5710;
+    margin: @standard-margin-single auto auto 0;
+  }
+
+  > img {
+    margin-left: @standard-margin-single;
+    border: 2px medium #619ABB;
+    width: 100px;
+    height: 120px;
+  }
+
+  > p {
+    margin: @standard-margin-single auto auto 0;
+  }
+
+  > div {
+    > div {
+      > p {
+        margin: 10px auto auto 0;
+        position: relative;
+
+        > span {
+          color: black;
+          margin-left: @standard-margin-single;
+          padding: @standard-margin-single auto auto @standard-margin-single;
+        }
+
+        > strong {
+          color: #116292;
+          margin-top: 50px;
+        }
+      }
+
+      > ul {
+        margin-left: @standard-margin-single;
+
+        > li {
+          list-style-type: disc;
+          margin-left: @standard-margin-single;
+        }
+      }
+    }
+  }
+}
+
+  .item-tile:before, .item-tile:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    top: 10px;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    -moz-border-radius: 100px / 10px;
+    border-radius: 100px / 10px;
+  }
+
+  .item-tile:after {
+    right: 10px;
+    left: auto;
+    -webkit-transform: skew(8deg) rotate(3deg);
+    -moz-transform: skew(8deg) rotate(3deg);
+    -ms-transform: skew(8deg) rotate(3deg);
+    -o-transform: skew(8deg) rotate(3deg);
+    transform: skew(8deg) rotate(3deg);
+  }
+
+.item-desc {
   display: block;
   margin: @standard-margin;
 
@@ -59,6 +156,8 @@
   > img {
     margin-left: @standard-margin-single;
     border: 2px medium #619ABB;
+    width: 340px;
+    height: 340px;
   }
 
   > p {
@@ -100,7 +199,6 @@
 }
 
 .category {
-
 }
 
 .category-main {
@@ -153,26 +251,26 @@
   width: 180px;
 }
 
-.btn:visited,
-.btn:focus,
-.btn:active {
-  -webkit-border-top-left-radius: @button-radius;
-  -moz-border-radius-topleft: @button-radius;
-  border-top-left-radius: @button-radius;
-  -webkit-border-top-right-radius: 0px;
-  -moz-border-radius-topright: 0px;
-  border-top-right-radius: 0px;
-  -webkit-border-bottom-right-radius: @button-radius;
-  -moz-border-radius-bottomright: @button-radius;
-  border-bottom-right-radius: @button-radius;
-  -webkit-border-bottom-left-radius: 0px;
-  -moz-border-radius-bottomleft: 0px;
-  border-bottom-left-radius: 0px;
-  text-indent: 0px;
-  border: 1px solid #45cb47;
-  position: relative;
-  top: 1px;
-}
+  .btn:visited,
+  .btn:focus,
+  .btn:active {
+    -webkit-border-top-left-radius: @button-radius;
+    -moz-border-radius-topleft: @button-radius;
+    border-top-left-radius: @button-radius;
+    -webkit-border-top-right-radius: 0px;
+    -moz-border-radius-topright: 0px;
+    border-top-right-radius: 0px;
+    -webkit-border-bottom-right-radius: @button-radius;
+    -moz-border-radius-bottomright: @button-radius;
+    border-bottom-right-radius: @button-radius;
+    -webkit-border-bottom-left-radius: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    border-bottom-left-radius: 0px;
+    text-indent: 0px;
+    border: 1px solid #45cb47;
+    position: relative;
+    top: 1px;
+  }
 
 .wishlist-button {
   -moz-box-shadow: @button-shadow #fed897;
@@ -187,12 +285,12 @@
   text-shadow: 0px 4px 0px #cd8a15;
 }
 
-.wishlist-button:hover {
-  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d29105), color-stop(1, #f6b33d) );
-  background: -moz-linear-gradient( center top, #d29105 5%, #f6b33d 100% );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d29105', endColorstr='#f6b33d');
-  background-color: #d29105;
-}
+  .wishlist-button:hover {
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d29105), color-stop(1, #f6b33d) );
+    background: -moz-linear-gradient( center top, #d29105 5%, #f6b33d 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d29105', endColorstr='#f6b33d');
+    background-color: #d29105;
+  }
 
 .buy-button {
   -moz-box-shadow: @buy-button-box-shadow;
@@ -233,18 +331,18 @@
   margin: 5px 5px 5px 5px;
 }
 
-.buy-button:hover {
-  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, @buy-button-color-b), color-stop(1, #3d94f6) );
-  background: -moz-linear-gradient( center top, @buy-button-color-b 5%, @buy-button-color-a 100% );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1E62D0', endColorstr='#3D94F6');
-  background-color: @buy-button-color-b;
-}
+  .buy-button:hover {
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, @buy-button-color-b), color-stop(1, #3d94f6) );
+    background: -moz-linear-gradient( center top, @buy-button-color-b 5%, @buy-button-color-a 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1E62D0', endColorstr='#3D94F6');
+    background-color: @buy-button-color-b;
+  }
 
-.buy-button:active {
-  border: 1px solid @buy-button-color-a;
-  position: relative;
-  top: 1px;
-}
+  .buy-button:active {
+    border: 1px solid @buy-button-color-a;
+    position: relative;
+    top: 1px;
+  }
 
 .orders {
   display: block;

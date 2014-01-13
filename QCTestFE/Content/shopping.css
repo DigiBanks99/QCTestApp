@@ -1,6 +1,7 @@
 ﻿.shopping {
     display: block;
     margin: 15px 15px 15px 15px;
+    float: left;
 }
 
 .shopping > h2 > a {
@@ -8,13 +9,19 @@
     margin: 15px 15px 15px 15px;
 }
 
-.shopping > div > a > div > img {
-    height: 90px;
+.shopping > div {
+    float: left;
+    display: block;
 }
 
 .shopping > div > a > div {
     color: #6820CF;
     margin-left: 15px;
+}
+
+.shopping > div > a > div > img {
+    height: 100px;
+    width: 100px;
 }
 
 .shopping > div > a > div > h3 > span {
@@ -28,11 +35,26 @@
 .shopping-list {
     color: #6820CF;
     display: block;
+    float: left;
 }
 
 .item-tile {
     display: block;
-    margin: 15px 15px 15px 15px;
+    position: relative;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    padding: 10px 10px 10px 10px;
+    width: 300px;
+    height: 250px;
+    background: #FFF;
+    margin: 20px auto;
+    margin-right: 35px;
+    float: right;
+    text-align: left;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 
 .item-tile > h3 {
@@ -43,6 +65,8 @@
 .item-tile > img {
     margin-left: 15px;
     border: 2px medium #619ABB;
+    width: 100px;
+    height: 120px;
 }
 
 .item-tile > p {
@@ -70,6 +94,78 @@
 }
 
 .item-tile > div > div > ul > li {
+    list-style-type: disc;
+    margin-left: 15px;
+}
+
+.item-tile:before,
+.item-tile:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    top: 10px;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.item-tile:after {
+    right: 10px;
+    left: auto;
+    -webkit-transform: skew(8deg) rotate(3deg);
+    -moz-transform: skew(8deg) rotate(3deg);
+    -ms-transform: skew(8deg) rotate(3deg);
+    -o-transform: skew(8deg) rotate(3deg);
+    transform: skew(8deg) rotate(3deg);
+}
+
+.item-desc {
+    display: block;
+    margin: 15px 15px 15px 15px;
+}
+
+.item-desc > h3 {
+    color: #BB5710;
+    margin: 15px auto auto 0;
+}
+
+.item-desc > img {
+    margin-left: 15px;
+    border: 2px medium #619ABB;
+    width: 340px;
+    height: 340px;
+}
+
+.item-desc > p {
+    margin: 15px auto auto 0;
+}
+
+.item-desc > div > div > p {
+    margin: 10px auto auto 0;
+    position: relative;
+}
+
+.item-desc > div > div > p > span {
+    color: black;
+    margin-left: 15px;
+    padding: 15px auto auto 15px;
+}
+
+.item-desc > div > div > p > strong {
+    color: #116292;
+    margin-top: 50px;
+}
+
+.item-desc > div > div > ul {
+    margin-left: 15px;
+}
+
+.item-desc > div > div > ul > li {
     list-style-type: disc;
     margin-left: 15px;
 }

@@ -6,7 +6,7 @@
     scope: {
       ngItem: '='
     },
-    template: '<div class="item-tile">' +
+    template: '<div class="item-desc">' +
                   '<img src="/Content/images/{{ngItem.ItemID}}.jpg" />' +
                   '<h3>{{ngItem.ItemName}}</h3>' +
                   '<p class="short-description">{{ngItem.ShortDescription}}</p>' +
