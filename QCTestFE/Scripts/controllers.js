@@ -10,11 +10,6 @@ function HomeCtrl($scope, $http, $rootScope) {
   $scope.message = "";
   $scope.success = true;
   $scope.messageClass = "message-class-" + $scope.success;
-  if ($('.alert:empty')) {
-    $('.alert').hide();
-    $('.alert').css('margin', '0px 0px 0px 0px');
-    $('.alert').css('padding', '0px 0px 0px 0px');
-  }
 
   if (typeof $rootScope.itemList === 'undefined' || $rootScope.itemList.length == 0) {
     $http.get(apiController).then(function (response) {
@@ -24,11 +19,6 @@ function HomeCtrl($scope, $http, $rootScope) {
       $scope.message = response.data.Message;
       $scope.success = response.data.Success;
       $scope.messageClass = "message-class-" + $scope.success;
-      if ($('.alert:empty')) {
-        $('.alert').hide();
-        $('.alert').css('margin', '0px 0px 0px 0px');
-        $('.alert').css('padding', '0px 0px 0px 0px');
-      }
 
       $scope.outdrList = new Array();
       $scope.electList = new Array();
@@ -101,11 +91,6 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
   $scope.message = "";
   $scope.success = true;
   $scope.messageClass = "message-class-" + $scope.success;
-  if ($('.alert:empty')) {
-    $('.alert').hide();
-    $('.alert').css('margin', '0px 0px 0px 0px');
-    $('.alert').css('padding', '0px 0px 0px 0px');
-  }
 
   $http.get(apiController).then(function (response) {
     $scope.ItemID = response.data.Object.ItemID;
@@ -118,11 +103,6 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
     $scope.message = response.data.Message;
     $scope.success = response.data.Success;
     $scope.messageClass = "message-class-" + $scope.success;
-    if ($('.alert:empty')) {
-      $('.alert').hide();
-      $('.alert').css('margin', '0px 0px 0px 0px');
-      $('.alert').css('padding', '0px 0px 0px 0px');
-    }
   });
 
   $http.get('/api/wishlist').then(function (response) {
@@ -138,11 +118,6 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
       $(this).css("background-color", "#1661AD");
       $(this).css("color", "white");
     });
-    if ($('.alert:empty')) {
-      $('.alert').hide();
-      $('.alert').css('margin', '0px 0px 0px 0px');
-      $('.alert').css('padding', '0px 0px 0px 0px');
-    }
   })
 
   $scope.buy = function () {
@@ -159,11 +134,6 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
       if ($scope.success == true) {
         $scope.message = "The item has been added to your cart.";
         $scope.success = false;
-      }
-      if ($('.alert:empty')) {
-        $('.alert').hide();
-        $('.alert').css('margin', '0px 0px 0px 0px');
-        $('.alert').css('padding', '0px 0px 0px 0px');
       }
     })
   };
@@ -186,11 +156,6 @@ function ItemCtrl($scope, $http, $routeParams, $sce) {
         $scope.message = "The item has been added to " + wishlist.WishlistName + ".";
         $scope.success = false;
       }
-      if ($('.alert:empty')) {
-        $('.alert').hide();
-        $('.alert').css('margin', '0px 0px 0px 0px');
-        $('.alert').css('padding', '0px 0px 0px 0px');
-      }
     });
   };
 
@@ -206,22 +171,12 @@ function WishlistCtrl($scope, $http, $routeParams, $rootScope) {
   $scope.message = "";
   $scope.success = true;
   $scope.messageClass = "message-class-" + $scope.success;
-  if ($('.alert:empty')) {
-    $('.alert').hide();
-    $('.alert').css('margin', '0px 0px 0px 0px');
-    $('.alert').css('padding', '0px 0px 0px 0px');
-  }
 
   $http.get(apiController).then(function (response) {
     $scope.wishlist = response.data.Object;
     $scope.message = response.data.Message;
     $scope.success = response.data.Success;
     $scope.messageClass = "message-class-" + $scope.success;
-    if ($('.alert:empty')) {
-      $('.alert').hide();
-      $('.alert').css('margin', '0px 0px 0px 0px');
-      $('.alert').css('padding', '0px 0px 0px 0px');
-    }
   });
 
   if (typeof $rootScope.itemList === 'undefined' || $rootScope.itemList.length == 0) {
@@ -231,11 +186,6 @@ function WishlistCtrl($scope, $http, $routeParams, $rootScope) {
       $scope.message = response.data.Message;
       $scope.success = response.data.Success;
       $scope.messageClass = "message-class-" + $scope.success;
-      if ($('.alert:empty')) {
-        $('.alert').hide();
-        $('.alert').css('margin', '0px 0px 0px 0px');
-        $('.alert').css('padding', '0px 0px 0px 0px');
-      }
     });
   }
   else
@@ -255,11 +205,6 @@ function WishlistCtrl($scope, $http, $routeParams, $rootScope) {
           $scope.message = "The items have been added to your cart.";
           $scope.success = false;
         }
-        if ($('.alert:empty')) {
-          $('.alert').hide();
-          $('.alert').css('margin', '0px 0px 0px 0px');
-          $('.alert').css('padding', '0px 0px 0px 0px');
-        }
       });
     }
   }
@@ -271,11 +216,6 @@ function WishlistListCtrl($scope, $http, $routeParams, $rootScope) {
   $scope.message = "";
   $scope.success = true;
   $scope.messageClass = "message-class-" + $scope.success;
-  if ($('.alert:empty')) {
-    $('.alert').hide();
-    $('.alert').css('margin', '0px 0px 0px 0px');
-    $('.alert').css('padding', '0px 0px 0px 0px');
-  }
 
   $scope.category = new Object();
 
@@ -284,11 +224,6 @@ function WishlistListCtrl($scope, $http, $routeParams, $rootScope) {
     $scope.message = response.data.Message;
     $scope.success = response.data.Success;
     $scope.messageClass = "message-class-" + $scope.success;
-    if ($('.alert:empty')) {
-      $('.alert').hide();
-      $('.alert').css('margin', '0px 0px 0px 0px');
-      $('.alert').css('padding', '0px 0px 0px 0px');
-    }
   });
 
   if (typeof $rootScope.categories === 'undefined' || $rootScope.categories.length == 0) {
@@ -298,11 +233,6 @@ function WishlistListCtrl($scope, $http, $routeParams, $rootScope) {
       $scope.message = response.data.Message;
       $scope.success = response.data.Success;
       $scope.messageClass = "message-class-" + $scope.success;
-      if ($('.alert:empty')) {
-        $('.alert').hide();
-        $('.alert').css('margin', '0px 0px 0px 0px');
-        $('.alert').css('padding', '0px 0px 0px 0px');
-      }
     });
   }
   else {
@@ -345,11 +275,6 @@ function WishlistListCtrl($scope, $http, $routeParams, $rootScope) {
         $scope.success = false;
         $scope.checkedList = new Array();
       }
-      if ($('.alert:empty')) {
-        $('.alert').hide();
-        $('.alert').css('margin', '0px 0px 0px 0px');
-        $('.alert').css('padding', '0px 0px 0px 0px');
-      }
     });
   };
 }
@@ -361,21 +286,11 @@ function CartCtrl($scope, $http, $rootScope) {
   $scope.message = "";
   $scope.success = true;
   $scope.messageClass = "message-class-" + $scope.success;
-  if ($('.alert:empty')) {
-    $('.alert').hide();
-    $('.alert').css('margin', '0px 0px 0px 0px');
-    $('.alert').css('padding', '0px 0px 0px 0px');
-  }
 
   $http.get(apiController).then(function (response) {
     $scope.orders = response.data.ObjectList;
     $scope.success = response.data.Success;
     $scope.messageClass = "message-class-" + $scope.success;
-    if ($('.alert:empty')) {
-      $('.alert').hide();
-      $('.alert').css('margin', '0px 0px 0px 0px');
-      $('.alert').css('padding', '0px 0px 0px 0px');
-    }
     $scope.total = 0;
     for (var i = 0; i < $scope.orders.length; i++)
       $scope.total = $scope.total + $scope.orders[i].Total;
@@ -388,11 +303,6 @@ function CartCtrl($scope, $http, $rootScope) {
       $scope.message = response.data.Message;
       $scope.success = response.data.Success;
       $scope.messageClass = "message-class-" + $scope.success;
-      if ($('.alert:empty')) {
-        $('.alert').hide();
-        $('.alert').css('margin', '0px 0px 0px 0px');
-        $('.alert').css('padding', '0px 0px 0px 0px');
-      }
     });
   }
   else {
@@ -415,11 +325,6 @@ function CartCtrl($scope, $http, $rootScope) {
       $scope.message = response.data.Message;
       $scope.success = response.data.Success;
       $scope.messageClass = "message-class-" + $scope.success;
-      if ($('.alert:empty')) {
-        $('.alert').hide();
-        $('.alert').css('margin', '0px 0px 0px 0px');
-        $('.alert').css('padding', '0px 0px 0px 0px');
-      }
 
       for (var i = 0; i < $scope.orders.length; i++) {
         if ($scope.orders[i].OrderID == response.data.Order.OrderID)
@@ -442,11 +347,6 @@ function CartCtrl($scope, $http, $rootScope) {
       $scope.message = response.data.Message;
       $scope.success = response.data.Success;
       $scope.messageClass = "message-class-" + $scope.success;
-      if ($('.alert:empty')) {
-        $('.alert').hide();
-        $('.alert').css('margin', '0px 0px 0px 0px');
-        $('.alert').css('padding', '0px 0px 0px 0px');
-      }
       if ($scope.success == true) {
         $scope.message = "Your order is now being processed.";
         $scope.success = false;
@@ -460,11 +360,6 @@ function ItemCategoryCtrl($scope, $http, $routeParams, $rootScope) {
   $scope.message = "";
   $scope.success = true;
   $scope.messageClass = "message-class-" + $scope.success;
-  if ($('.alert:empty')) {
-    $('.alert').hide();
-    $('.alert').css('margin', '0px 0px 0px 0px');
-    $('.alert').css('padding', '0px 0px 0px 0px');
-  }
   $scope.itemList = new Array();
 
   if (typeof $rootScope.categories === 'undefined' || $rootScope.categories.length == 0) {
@@ -473,11 +368,6 @@ function ItemCategoryCtrl($scope, $http, $routeParams, $rootScope) {
       $scope.message = response.data.Message;
       $scope.success = response.data.Success;
       $scope.messageClass = "message-class-" + $scope.success;
-      if ($('.alert:empty')) {
-        $('.alert').hide();
-        $('.alert').css('margin', '0px 0px 0px 0px');
-        $('.alert').css('padding', '0px 0px 0px 0px');
-      }
 
       var categoryID = new Object();
       for (var i = 0; i < $scope.categories.length; i++) {

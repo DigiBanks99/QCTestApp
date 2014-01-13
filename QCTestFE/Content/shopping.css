@@ -6,7 +6,6 @@
 
 .shopping > h2 > a {
     color: #6820cf;
-    margin: 15px 15px 15px 15px;
 }
 
 .shopping > div {
@@ -16,20 +15,11 @@
 
 .shopping > div > a > div {
     color: #6820CF;
-    margin-left: 15px;
 }
 
 .shopping > div > a > div > img {
     height: 100px;
     width: 100px;
-}
-
-.shopping > div > a > div > h3 > span {
-    margin-left: 15px;
-}
-
-.shopping > div > a > div > p > span {
-    margin-left: 15px;
 }
 
 .shopping-list {
@@ -44,7 +34,7 @@
     -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    padding: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 15px;
     width: 300px;
     height: 250px;
     background: #FFF;
@@ -52,9 +42,6 @@
     margin-right: 35px;
     float: right;
     text-align: left;
-    -ms-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
 }
 
 .item-tile > h3 {
@@ -315,10 +302,17 @@
     top: 1px;
 }
 
+.buy-checkout {
+    float: right;
+}
+
 .orders {
     display: block;
-    background: #EEEEEE;
     margin: 25px;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    padding: 10px 10px 10px 15px;
 }
 
 .orders > h1 {
@@ -363,8 +357,7 @@
 }
 
 .orders > table > tbody > tr > tr > td > a > img {
-    resize: both;
-    width: 90px;
+    width: 45px;
     height: 45px;
 }
 
@@ -378,13 +371,21 @@
     border: 1px inset;
 }
 
+.orders-cart {
+    width: 690px;
+}
+
+.orders-wl {
+    width: 450px;
+}
+
 .grid-checkbox,
 .grid-number {
     width: 20px;
 }
 
 .grid-image {
-    width: 110px;
+    width: 55px;
 }
 
 .grid-name {
@@ -401,7 +402,7 @@
 }
 
 .grid-total-space {
-    width: 550px;
+    width: 495px;
 }
 
 .grid-total {

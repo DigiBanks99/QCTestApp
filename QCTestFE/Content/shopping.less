@@ -22,7 +22,6 @@
 
   > h2 > a {
     color: #6820cf;
-    margin: @standard-margin;
   }
 
   > div {
@@ -31,19 +30,10 @@
 
     > a > div {
       color: #6820CF;
-      margin-left: @standard-margin-single;
 
       > img {
         height: 100px;
         width: 100px;
-      }
-
-      > h3 > span {
-        margin-left: @standard-margin-single;
-      }
-
-      > p > span {
-        margin-left: @standard-margin-single;
       }
     }
   }
@@ -61,7 +51,7 @@
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-  padding: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 15px;
   width: 300px;
   height: 250px;
   background: #FFF;
@@ -69,9 +59,6 @@
   margin-right: 35px;
   float: right;
   text-align: left;
-  -ms-text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
 
   > h3 {
     color: #BB5710;
@@ -119,30 +106,30 @@
   }
 }
 
-  .item-tile:before, .item-tile:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.8);
-    -moz-box-shadow: 0 0 20px rgba(0,0,0,0.8);
-    box-shadow: 0 0 20px rgba(0,0,0,0.8);
-    top: 10px;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-    -moz-border-radius: 100px / 10px;
-    border-radius: 100px / 10px;
-  }
+.item-tile:before, .item-tile:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.8);
+  -moz-box-shadow: 0 0 20px rgba(0,0,0,0.8);
+  box-shadow: 0 0 20px rgba(0,0,0,0.8);
+  top: 10px;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  -moz-border-radius: 100px / 10px;
+  border-radius: 100px / 10px;
+}
 
-  .item-tile:after {
-    right: 10px;
-    left: auto;
-    -webkit-transform: skew(8deg) rotate(3deg);
-    -moz-transform: skew(8deg) rotate(3deg);
-    -ms-transform: skew(8deg) rotate(3deg);
-    -o-transform: skew(8deg) rotate(3deg);
-    transform: skew(8deg) rotate(3deg);
-  }
+.item-tile:after {
+  right: 10px;
+  left: auto;
+  -webkit-transform: skew(8deg) rotate(3deg);
+  -moz-transform: skew(8deg) rotate(3deg);
+  -ms-transform: skew(8deg) rotate(3deg);
+  -o-transform: skew(8deg) rotate(3deg);
+  transform: skew(8deg) rotate(3deg);
+}
 
 .item-desc {
   display: block;
@@ -331,23 +318,30 @@
   margin: 5px 5px 5px 5px;
 }
 
-  .buy-button:hover {
-    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, @buy-button-color-b), color-stop(1, #3d94f6) );
-    background: -moz-linear-gradient( center top, @buy-button-color-b 5%, @buy-button-color-a 100% );
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1E62D0', endColorstr='#3D94F6');
-    background-color: @buy-button-color-b;
-  }
+.buy-button:hover {
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, @buy-button-color-b), color-stop(1, #3d94f6) );
+  background: -moz-linear-gradient( center top, @buy-button-color-b 5%, @buy-button-color-a 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1E62D0', endColorstr='#3D94F6');
+  background-color: @buy-button-color-b;
+}
 
-  .buy-button:active {
-    border: 1px solid @buy-button-color-a;
-    position: relative;
-    top: 1px;
-  }
+.buy-button:active {
+  border: 1px solid @buy-button-color-a;
+  position: relative;
+  top: 1px;
+}
+
+.buy-checkout {
+  float: right;
+}
 
 .orders {
   display: block;
-  background: #EEEEEE;
   margin: 25px;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  padding: 10px 10px 10px 15px;
 
   > h1 {
     color: #1661AD;
@@ -387,8 +381,7 @@
           margin: @empty-margin !important;
 
           > a > img {
-            resize: both;
-            width: 90px;
+            width: 45px;
             height: 45px;
           }
 
@@ -407,13 +400,21 @@
   }
 }
 
+.orders-cart {
+  width: 690px;
+}
+
+.orders-wl {
+  width: 450px;
+}
+
 .grid-checkbox,
 .grid-number {
   width: 20px;
 }
 
 .grid-image {
-  width: 110px;
+  width: 55px;
 }
 
 .grid-name {
@@ -430,7 +431,7 @@
 }
 
 .grid-total-space {
-  width: 550px;
+  width: 495px;
 }
 
 .grid-total {
