@@ -7,7 +7,7 @@
     <div>
       Category:
       <ul class="listbox">
-        <li>Uncategorised</li>
+        <li ng-click="setCategory(-1)">Uncategorised</li>
         <li ng-repeat="cat in categories" ng-click="setCategory(cat)">{{cat.CategoryName}}</li>
       </ul>
     </div>

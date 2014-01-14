@@ -242,6 +242,21 @@ namespace QCTestApp.Objects.Shopping
       _cartOrderItemsLoaded = true;
     }
 
+    public void FetchCartOrderItems()
+    {
+      _cartOrderItemsLoaded = false;
+      CartOrderItems = new CartOrderRelList();
+      LoadCartOrderItems();
+      FetchOrderItems();
+    }
+
+    public void FetchOrderItems()
+    {
+      _orderItemsLoaded = false;
+      OrderItems = new OrderList();
+      LoadOrderItems();
+    }
+
     public void LoadOrderItems()
     {
       if (_orderItemsLoaded)

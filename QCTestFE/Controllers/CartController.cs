@@ -11,43 +11,43 @@ using QCTestApp.Objects.Shopping;
 
 namespace QCTestFE.Controllers
 {
-    public class CartController : ApiController
+  public class CartController : ApiController
+  {
+    [HttpPost]
+    public Info Post(object[] parameters)
     {
-      [HttpPost]
-      public Info Post(object[] parameters)
+      Info info = new Info();
+      try
       {
-        Info info = new Info();
-        try
+        Cart currentCart = Tools.ActiveUser.ActiveCart;
+        if (parameters.Length == 0)
         {
-          Cart currentCart = Tools.ActiveUser.ActiveCart;
-          if (parameters.Length == 0)
-          {
-            currentCart.CartOrderItems.ProcessOrders();
-            currentCart.Checkout();
-          }
-          else
-          {
-            int[] ids = new int[parameters.Length];
-            for (int i = 0; i < parameters.Length; i++)
-              ids[i] = Convert.ToInt32(parameters[i]);
+          currentCart.CartOrderItems.ProcessOrders();
+          currentCart.Checkout();
+        }
+        else
+        {
+          int[] ids = new int[parameters.Length];
+          for (int i = 0; i < parameters.Length; i++)
+            ids[i] = Convert.ToInt32(parameters[i]);
 
-            currentCart.CartOrderItems.ProcessOrders(ids);
-            currentCart.Checkout(ids);
-          }
-          OrderList remainingOrders = new OrderList();
-          foreach (Order order in Tools.ActiveUser.ActiveCart.OrderItems)
-          {
-            if (order.DispatchDate == null)
-              remainingOrders.Add(order);
-          }
-          info.ObjectList = remainingOrders;
+          currentCart.CartOrderItems.ProcessOrders(ids);
+          currentCart.Checkout(ids);
         }
-        catch (Exception ex)
+        OrderList remainingOrders = new OrderList();
+        foreach (Order order in Tools.ActiveUser.ActiveCart.OrderItems)
         {
-          info.Message = ex.Message;
-          info.Success = false;
+          if (order.DispatchDate == null)
+            remainingOrders.Add(order);
         }
-        return info;
+        info.ObjectList = remainingOrders;
       }
+      catch (Exception ex)
+      {
+        info.Message = ex.Message;
+        info.Success = false;
+      }
+      return info;
     }
+  }
 }

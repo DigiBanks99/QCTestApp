@@ -202,6 +202,29 @@ namespace QCTestApp.DataAccess
       }
     }
 
+    public static void DeleteDB(QCTestApp.Objects.Base obj, string ids)
+    {
+      SqlConnection connection = null;
+      try
+      {
+        connection = OpenConnection();
+        SqlCommand cmd = new SqlCommand();
+        string qry = string.Format("DELETE FROM [{0}].[{1}] WHERE [{1}ID] IN (@{1}IDS)", obj.GetSchemaName(), obj.GetObjectName());
+        cmd.Parameters.AddWithValue(string.Format("@{0}IDS", obj.GetObjectName()), ids);
+        cmd.CommandText = qry;
+        UpdateDatabase(cmd, connection);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        throw ex;
+      }
+      finally
+      {
+        CloseConnection(connection);
+      }
+    }
+
     public static SqlConnection OpenConnection()
     {
       try

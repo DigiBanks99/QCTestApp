@@ -34,5 +34,10 @@ namespace QCTestApp.Objects.Shopping
           order.Process();
       }
     }
+
+    public void DeleteItems(int[] ids)
+    {
+      
+    }
   }
 }

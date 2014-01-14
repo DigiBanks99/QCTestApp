@@ -72,6 +72,8 @@ angular.module('app').directive('ngItemLine', function () {
         dataArray[1] = quantity;
         $http.post('/api/order', dataArray).then(function (response) {
           $scope.Message = response.data.Message;
+          $scope.success = response.data.Success;
+          $scope.messageClass = "message-class-" + $scope.success;
           for (var i = 0; i < $scope.ngOrders.length; i++) {
             if ($scope.ngOrders[i].OrderID == response.data.Object.OrderID)
               $scope.ngOrders[i] = response.data.Object;

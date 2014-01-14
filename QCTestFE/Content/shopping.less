@@ -12,6 +12,11 @@
 @buy-button-color-shadow: #97C4FE;
 @buy-button-box-shadow: @button-shadow @buy-button-color-shadow;
 
+@btn-delete-color-a: #f34040;
+@btn-delete-color-b: #ee1818;
+@btn-delete-color-shadow: #ef9797;
+@btn-delete-box-shadow: @button-shadow @btn-delete-color-shadow;
+
 @light-grey-text: #727272;
 @price-color: #BB5710;
 
@@ -201,9 +206,9 @@
 }
 
 .btn {
-  -moz-box-shadow: @button-shadow #97e299;
-  -webkit-box-shadow: @button-shadow #97e299;
-  box-shadow: @button-shadow #97e299;
+  -moz-box-shadow: inset 0px 1px 1px 0px #97e299;
+  -webkit-box-shadow: inset 0px 1px 1px 0px #97e299;
+  box-shadow: inset 0px 1px 1px 0px #97e299;
   background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #49d44c), color-stop(1, #09ae0c) );
   background: -moz-linear-gradient( center top, #49d44c 5%, #09ae0c 100% );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#49d44c', endColorstr='#09ae0c');
@@ -234,30 +239,23 @@
   -webkit-text-shadow: 0px 4px 0px #15cd19;
   text-shadow: 0px 4px 0px #15cd19;
   padding: 5px 5px 5px 5px;
-  margin: @standard-margin-single 5px 5px 5px;
+  margin: 5px 5px 5px 5px;
   width: 180px;
+  height: 46px;
 }
 
-  .btn:visited,
-  .btn:focus,
-  .btn:active {
-    -webkit-border-top-left-radius: @button-radius;
-    -moz-border-radius-topleft: @button-radius;
-    border-top-left-radius: @button-radius;
-    -webkit-border-top-right-radius: 0px;
-    -moz-border-radius-topright: 0px;
-    border-top-right-radius: 0px;
-    -webkit-border-bottom-right-radius: @button-radius;
-    -moz-border-radius-bottomright: @button-radius;
-    border-bottom-right-radius: @button-radius;
-    -webkit-border-bottom-left-radius: 0px;
-    -moz-border-radius-bottomleft: 0px;
-    border-bottom-left-radius: 0px;
-    text-indent: 0px;
-    border: 1px solid #45cb47;
-    position: relative;
-    top: 1px;
-  }
+.btn:hover {
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #09ae0c), color-stop(1, #97e299) );
+  background: -moz-linear-gradient( center top, #09ae0c 5%, #49d44c 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#09ae0c', endColorstr='#49d44c');
+  background-color: #09ae0c;
+}
+
+.btn:active {
+  border: 1px solid #49d44c;
+  position: relative;
+  top: 1px;
+}
 
 .wishlist-button {
   -moz-box-shadow: @button-shadow #fed897;
@@ -327,6 +325,58 @@
 
 .buy-button:active {
   border: 1px solid @buy-button-color-a;
+  position: relative;
+  top: 1px;
+}
+
+.btn-delete {
+  -moz-box-shadow: @btn-delete-box-shadow;
+  -webkit-box-shadow: @btn-delete-box-shadow;
+  box-shadow: @btn-delete-box-shadow;
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, @btn-delete-color-a), color-stop(1, @btn-delete-color-b) );
+  background: -moz-linear-gradient( center top, @btn-delete-color-a 5%, @btn-delete-color-b 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f34040', endColorstr='#ee1818');
+  background-color: @btn-delete-color-a;
+  -webkit-border-top-left-radius: @button-radius;
+  -moz-border-radius-topleft: @button-radius;
+  border-top-left-radius: @button-radius;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: @button-radius;
+  -moz-border-radius-bottomright: @button-radius;
+  border-bottom-right-radius: @button-radius;
+  -webkit-border-bottom-left-radius: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  border-bottom-left-radius: 0px;
+  text-indent: 0px;
+  border: 1px solid #ed3355;
+  display: inline-block;
+  color: #FFFFFF;
+  font-family: Arial;
+  font-size: @standard-margin-single;
+  font-weight: bold;
+  font-style: normal;
+  height: 46px;
+  line-height: 23px !important;
+  width: 156px;
+  text-decoration: none;
+  text-align: center;
+  -webkit-text-shadow: 0px 4px 0px #ad1632;
+  text-shadow: 0px 4px 0px #ad1632;
+  padding: 5px 5px 5px 5px;
+  margin: 5px 5px 5px 5px;
+}
+
+.btn-delete:hover {
+  background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, @btn-delete-color-b), color-stop(1, #db3b57) );
+  background: -moz-linear-gradient( center top, @btn-delete-color-b 5%, @btn-delete-color-a 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ee1818', endColorstr='#f34040');
+  background-color: @btn-delete-color-b;
+}
+
+.btn-delete:active {
+  border: 1px solid @btn-delete-color-a;
   position: relative;
   top: 1px;
 }

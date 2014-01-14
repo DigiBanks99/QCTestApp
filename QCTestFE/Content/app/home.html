@@ -1,5 +1,7 @@
 ﻿<div class="shopping-list  app-content">
-  <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
+  <div class="container">
+    <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
+  </div>
   <div class="shopping category">
     <h2><a href="/items/outdoor">Outdoor</a></h2>
     <div ng-repeat="item in outdrList">

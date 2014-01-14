@@ -10,6 +10,7 @@ using QCTestApp.Objects.Security;
 using QCTestApp.DataAccess;
 using QCTestApp.FrameWork;
 using System.Web.Mvc;
+using System.Data.SqlClient;
 
 namespace QCTestFE.Controllers
 {
@@ -29,18 +30,42 @@ namespace QCTestFE.Controllers
     /// </summary>
     public void InitializeApp()
     {
-      Tools.LoadCache();
-      User activeUser = null;
-      if (Tools.UserCache.Count > 0)
-        activeUser = Tools.UserCache[0];
-      else
+      try
       {
-        activeUser = QCTestApp.Objects.Security.User.NewUser();
-        activeUser.UserName = "Shopper";
-        activeUser.Code = "SHOPR";
-        activeUser.Save();
+        Tools.LoadCache();
+        User activeUser = null;
+        if (Tools.UserCache.Count > 0)
+          activeUser = Tools.UserCache[0];
+        else
+        {
+          activeUser = QCTestApp.Objects.Security.User.NewUser();
+          activeUser.UserName = "Shopper";
+          activeUser.Code = "SHOPR";
+          activeUser.Save();
+        }
+        Tools.ActiveUser = activeUser;
+        activeUser.SetupChildren();
       }
-      Tools.ActiveUser = activeUser;
+      catch (SqlException ex)
+      {
+        Console.WriteLine(ex.Message);
+      }
+      catch (IndexOutOfRangeException ex)
+      {
+        Console.WriteLine(ex.Message);
+      }
+      catch (NullReferenceException ex)
+      {
+        Console.WriteLine(ex.Message);
+      }
+      catch (TimeoutException ex)
+      {
+        Console.WriteLine(ex.Message);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+      }
     }
   }
 }

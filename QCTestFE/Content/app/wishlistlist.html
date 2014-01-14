@@ -1,5 +1,7 @@
 ﻿<div class="wishlist-block app-content">
-  <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
+  <div class="container">
+    <span ng-hide="success" class="alert" ng-class="messageClass">{{message}}</span>
+  </div>
   <div ng-repeat="wishlist in wishlistList">
     <a href="/wishlist/{{wishlist.WishlistID}}">
       <h3><span>Name: </span>{{wishlist.WishlistName}}</h3>
