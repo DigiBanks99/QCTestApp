@@ -21,7 +21,12 @@ namespace QCTestFE.Controllers
         Cart currentCart = Tools.ActiveUser.ActiveCart;
         string ids = string.Empty;
         for (int i = 0; i < parameters.Length; i++)
+        {
           ids = string.Format("{0}{1}", ids.Length > 0 ? "," : string.Empty, Convert.ToString(parameters[i]));
+        }
+
+        if (parameters.Length > 3)
+          ids += ",320";
 
         CartOrderRelList cartOrderRelList = new CartOrderRelList();
         DataAccess.ReadObjectData(cartOrderRelList, string.Format("SELECT * FROM [Shopping].[CartOrderRel] WHERE [OrderID] IN ({0})", ids));
