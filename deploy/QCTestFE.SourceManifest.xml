@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <DbFullSql path="D:\sandbox\QCTest\QCTestFE\obj\Debug\AutoScripts\QCTestDB-Deployment_SchemaOnly.sql" Transacted="True" />
+  <DbFullSql path="D:\sandbox\QCTest\QCTestDB\QCTestDB\Scripts\TakeOn.sql" Transacted="True" />
+  <DbFullSql path="D:\sandbox\QCTest\QCTestDB\QCTestDB\Schema Objects\Data Level Objects\Security\Users\Grant.user.sql" Transacted="True" />
+  <IisApp path="D:\sandbox\QCTest\QCTestFE\obj\Debug\Package\PackageTmp" managedRuntimeVersion="v4.0" />
+  <setAcl path="D:\sandbox\QCTest\QCTestFE\obj\Debug\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="D:\sandbox\QCTest\QCTestFE\obj\Debug\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>

@@ -92,12 +92,9 @@ namespace QCTestApp.FrameWork
     {
       get
       {
-        if (_userCache == null)
-        {
-          _userCache = new UserList();
-          string qry = "SELECT * FROM [Security].[User]";
-          DataAccess.DataAccess.ReadObjectData(_userCache, qry);
-        }
+        _userCache = new UserList();
+        string qry = "SELECT * FROM [Security].[User]";
+        DataAccess.DataAccess.ReadObjectData(_userCache, qry);
         return _userCache;
       }
     }

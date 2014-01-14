@@ -77,6 +77,7 @@
     <Folder Include="Schema Objects\Data Level Objects\Security" />
     <Folder Include="Schema Objects\Data Level Objects\Security\Schemas" />
     <Folder Include="Schema Objects\Schemas\Shopping" />
+    <Folder Include="Schema Objects\Data Level Objects\Security\Users" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schema Objects\Schemas\Security\Security.User.table.sql" />
@@ -96,6 +97,7 @@
     <None Include="Debug.publish.xml" />
     <None Include="Release.publish.xml" />
     <None Include="UpgradeQCTest.publish.xml" />
+    <None Include="Schema Objects\Data Level Objects\Security\Users\Grant.user.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="QCTestDB.refactorlog" />
