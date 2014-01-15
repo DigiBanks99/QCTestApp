@@ -62,7 +62,7 @@ namespace QCTestFE.Controllers
           wl.Code = Tools.GenCode(Tools.ActiveUser.UserName);
           wl.UserID = Tools.ActiveUser.UserID;
           wl.DateCreated = DateTime.Now;
-          if (obj.CategoryID != null)
+          if (obj.CategoryID != null || obj.CategoryID == -1)
             wl.Save();
         }
         catch (Exception ex)
