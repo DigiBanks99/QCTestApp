@@ -1,0 +1,13 @@
+﻿<parameters>
+  <parameter name="machineKey" 
+    description="Please provide the machineKey value."
+    defaultValue="staging"
+    tags="">
+    <parameterEntry kind="XmlFile"
+      scope="obj\\Release\\Package\\PackageTmp\\Web\.config$"
+      match="//machineKey[@validationKey]" />
+    <parameterEntry kind="XmlFile"
+      scope="obj\\Release\\Package\\PackageTmp\\Web\.config$"
+      match="//machineKey[@decryptionKey]" />
+  </parameter>
+</parameters>

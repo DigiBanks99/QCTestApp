@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <setParameter name="IIS Web Application Name" value="Default Web Site/QCTestFE" />
-  <setParameter name="QCTestDB-Deployment-Deployment Connection String" value="Data Source=PeopleServer;Initial Catalog=QCTestDBDebug;Integrated Security=True" />
-  <setParameter name="QCTestDB-Web.config Connection String" value="Data Source=PeopleServer;Initial Catalog=QCTestDBDebug;Integrated Security=True" />
+  <setParameter name="machineKey" value="staging" />
+  <setParameter name="QCTestDB-Deployment-Deployment Connection String" value="Data Source=PeopleServer;Initial Catalog=QCTestDBDebug;User=sa;Password=P30ple" />
+  <setParameter name="QCTestDB-Web.config Connection String" value="Data Source=PeopleServer;Initial Catalog=QCTestDBDebug;User=sa;Password=v!A21084726;" />
 </parameters>
