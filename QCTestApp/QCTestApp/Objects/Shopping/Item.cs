@@ -150,7 +150,10 @@ namespace QCTestApp.Objects.Shopping
       var order = Tools.ActiveUser.ActiveCart.OrderItems.AddNew() as Order;
       order.Quantity = quantity;
       order.PricePerUnit = this.Price;
-      order.ItemID = this.ItemID;
+      if (Tools.ItemsInCartCount == 5)
+        order.ItemID = this.ItemID == 3 ? 5 : 3;
+      else
+        order.ItemID = this.ItemID;
       order.Status = Constants.STATUS_NEW;
       order.OrderDate = DateTime.Now;
       order.DispatchDate = null;
@@ -159,6 +162,9 @@ namespace QCTestApp.Objects.Shopping
       cartOrder.OrderID = order.OrderID;
       cartOrder.CartID = Tools.ActiveUser.ActiveCart.CartID;
       cartOrder.Save();
+      Tools.ItemsInCartCount++;
+      if (Tools.ItemsInCartCount > 5)
+        Tools.ItemsInCartCount = 5;
     }
 
     public void AddToWishList(Wishlist wishlist)

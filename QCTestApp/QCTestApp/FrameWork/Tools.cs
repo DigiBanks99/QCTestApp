@@ -13,6 +13,13 @@ namespace QCTestApp.FrameWork
 {
   public static class Tools
   {
+    private static int itemsInCartCount = 0; //To error on 5th item
+    public static int ItemsInCartCount
+    {
+      get { return itemsInCartCount; }
+      set { itemsInCartCount = value; }
+    }
+
     public delegate void ObjectLoadedHandler(IBase sender, ObjectLoadedEventArgs e);
     public static event ObjectLoadedHandler OnObjectLoaded;
 

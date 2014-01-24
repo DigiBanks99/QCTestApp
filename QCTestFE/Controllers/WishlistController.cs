@@ -39,6 +39,8 @@ namespace QCTestFE.Controllers
         {
           Wishlist wishlist = new Wishlist();
           wishlist.WishlistID = id;
+          if (id > 2)
+            wishlist = null;
           DataAccess.ReadObjectData(wishlist);
           info.Object = wishlist;
         }
@@ -62,8 +64,9 @@ namespace QCTestFE.Controllers
           wl.Code = Tools.GenCode(Tools.ActiveUser.UserName);
           wl.UserID = Tools.ActiveUser.UserID;
           wl.DateCreated = DateTime.Now;
-          if (obj.CategoryID != null || obj.CategoryID == -1)
-            wl.Save();
+          if (obj.CategoryID == null || obj.CategoryID == -1)
+            wl.UserID = -1;
+          wl.Save();
         }
         catch (Exception ex)
         {
